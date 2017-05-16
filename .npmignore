@@ -1,0 +1,11 @@
+.vscode
+.git
+.idea
+.DS_Store
+.npmignore
+*.log
+node_modules
+src
+test
+karma.conf.js
+*.config.js
