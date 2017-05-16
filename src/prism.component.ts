@@ -4,12 +4,7 @@ const Prism = require('prismjs');
 
 @Component({
   selector: 'prism-highlight',
-  template: `
-    <pre *ngIf="language">
-      <code class="language-{{language}}">
-        <ng-content></ng-content>
-      </code>
-    </pre>
+  template: `<pre *ngIf="language"><code class="language-{{language}}"><ng-content></ng-content></code></pre>
   `,
   encapsulation: ViewEncapsulation.None
 })
