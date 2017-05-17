@@ -3,7 +3,7 @@
   "version": "0.1.2",
   "description": "Angular 2+ Components to create documentation on Angular Material.",
   "author": "Ścibor Rudnicki <scibor.rudnicki@wwwdev.io> (http://ngx-prism.wwwwdev.io)",
-  "homepage": "https://github.com/ngx-prism/material#readme",
+  "homepage": "https://github.com/ngx-prism/core#readme",
   "main": "dist/bundle.umd.js",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
