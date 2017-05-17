@@ -24,7 +24,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@types/prismjs": "^1.6.2",
     "prismjs": "^1.6.0"
   },
   "devDependencies": {
