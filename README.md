@@ -1,5 +1,16 @@
 # @ngx-prism/core
 
+[![npm version](https://badge.fury.io/js/%40ngx-prism%2Fcore.svg)](https://badge.fury.io/js/%40ngx-prism%2Fcore)
+[![GitHub version](https://badge.fury.io/gh/ngx-prism%2Fcore.svg)](https://badge.fury.io/gh/ngx-prism%2Fcore)
+
+[![Package Quality](http://npm.packagequality.com/badge/ngx-prism.png)](http://packagequality.com/#?package=ngx-prism)
+[![Known Vulnerabilities](https://snyk.io/test/npm/ngx-prism/badge.svg)](https://snyk.io/test/npm/ngx-prism)
+
+[![GitHub issues](https://img.shields.io/github/issues/ngx-prism/core.svg)](https://github.com/ngx-prism/core/issues)
+[![GitHub forks](https://img.shields.io/github/forks/ngx-prism/core.svg)](https://github.com/ngx-prism/core/network)
+[![GitHub stars](https://img.shields.io/github/stars/ngx-prism/core.svg)](https://github.com/ngx-prism/core/stargazers)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/ngx-prism/core/master/LICENSE)
+
 Angular 2+ Component of Prism a lightweight, extensible syntax highlighter, built with modern web standards in mind.
 
 ## Table of contents
@@ -77,7 +88,7 @@ How do I know when to release 1.0.0?
 
 ## License
 
-MIT © wwwdev.io
+MIT © ngx-prism
 
 ## Donate
 
