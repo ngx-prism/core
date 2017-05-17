@@ -6,7 +6,7 @@ import 'prismjs/prism';
 
 @Component({
   selector: 'prism-highlight',
-  templateUrl: require('./prism.component.html'),
+  template: require('./prism.component.html'),
   encapsulation: ViewEncapsulation.None
 })
 export class PrismComponent implements AfterViewInit {
