@@ -4,8 +4,7 @@ const Prism = require('prismjs');
 
 @Component({
   selector: 'prism-highlight',
-  template: `<pre *ngIf="language"><code class="language-{{language}}"><ng-content></ng-content></code></pre>
-  `,
+  templateUrl: require('./prism.component.html'),
   encapsulation: ViewEncapsulation.None
 })
 export class PrismComponent implements AfterViewInit {
