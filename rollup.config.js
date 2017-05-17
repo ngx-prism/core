@@ -19,10 +19,7 @@ export default {
       uglify()  
   ],
   globals: {
-    '@angular/animations': 'ng.animations',
-    '@angular/core': 'ng.core',
-    '@angular/forms': 'ng.forms',
-    '@angular/http': 'ng.http',
+    '@angular/core': 'ng.core'
   }
 };
 
