@@ -15,7 +15,11 @@ export default {
       commonjs({
           include: 'node_modules/rxjs/**',
       }),
-      nodeResolve({ jsnext: true, module: true }),
+      nodeResolve({
+        jsnext: true,
+        module: true,
+        extensions: [ '.js', '.json', 'html']
+      }),
       uglify()  
   ],
   globals: {
