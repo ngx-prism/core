@@ -2,10 +2,8 @@
 
 [![npm version](https://badge.fury.io/js/%40ngx-prism%2Fcore.svg)](https://badge.fury.io/js/%40ngx-prism%2Fcore)
 [![GitHub version](https://badge.fury.io/gh/ngx-prism%2Fcore.svg)](https://badge.fury.io/gh/ngx-prism%2Fcore)
-
 [![Package Quality](http://npm.packagequality.com/shield/ngx-prism.svg)](http://packagequality.com/#?package=ngx-prism)
 [![Known Vulnerabilities](https://snyk.io/test/npm/ngx-prism/badge.svg)](https://snyk.io/test/npm/ngx-prism)
-
 [![GitHub issues](https://img.shields.io/github/issues/ngx-prism/core.svg)](https://github.com/ngx-prism/core/issues)
 [![GitHub forks](https://img.shields.io/github/forks/ngx-prism/core.svg)](https://github.com/ngx-prism/core/network)
 [![GitHub stars](https://img.shields.io/github/stars/ngx-prism/core.svg)](https://github.com/ngx-prism/core/stargazers)
