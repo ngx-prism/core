@@ -9,26 +9,35 @@ module.exports = {
   resolve: {
     extensions: ['.ts','.js'],
     modules: [
-      path.resolve(__dirname, 'node_modules'),
-      // path.resolve(__dirname, 'src'),
+      path.resolve(__dirname, 'node_modules')
     ]
   },
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    library: 'nvd3-chart',
+    library: '@ngx-prism/core',
     libraryTarget: 'umd',
     filename: '[name].js'
   },
 
   module: {
     rules: [
+      // .ts files for TypeScript
       {
         test: /\.ts$/,
-        use: [
-          'awesome-typescript-loader'
+        loaders: [
+          'awesome-typescript-loader',
+          'angular2-template-loader',
+          'tslint-loader'
         ]
-      }
+      },
+      { test: /\.html$/, use: 'raw-loader' },
+      {
+        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+        use: ['file-loader',]
+      },
+      { test: /\.scss$/, use: ['to-string-loader', 'css-loader', 'postcss-loader',  'sass-loader'] },
+      { test: /\.css$/, use: ['to-string-loader', 'css-loader', 'postcss-loader' ] }
     ]
   },
 
