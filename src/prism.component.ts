@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, Input, ViewEncapsulation } from '@angular/core';
 
 // load prism
-import * as Prism from 'prismjs';
+declare var Prism: any;
+import 'prismjs/prism';
 
 @Component({
   selector: 'prism-highlight',
