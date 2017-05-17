@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, ViewEncapsulation } from '@angular/core';
 
-const Prism = require('prismjs');
+// load prism
+import * as Prism from 'prismjs';
 
 @Component({
   selector: 'prism-highlight',
@@ -8,11 +9,13 @@ const Prism = require('prismjs');
   encapsulation: ViewEncapsulation.None
 })
 export class PrismComponent implements AfterViewInit {
+  @Input('async') private async = true;
+  @Input('callback') private callback?: (element: Element) => void | undefined;
   @Input('language') language: string;
 
   constructor() { }
 
   ngAfterViewInit() {
-    Prism.highlightAll();
+    Prism.highlightAll(this.async, this.callback);
   }
 }
