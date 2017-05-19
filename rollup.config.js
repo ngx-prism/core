@@ -9,11 +9,13 @@ export default {
   exports: 'named',
   sourceMap: false,
   format: 'umd',
-  moduleName: '@ngx-docs/material',
+  moduleName: '@ngx-prism/core',
   onwarn,
   plugins: [
       commonjs({
-          include: 'node_modules/rxjs/**',
+          namedExports: {
+            'node_modules/rxjs/**': [ 'named' ]
+          }
       }),
       nodeResolve({
         jsnext: true,
@@ -37,3 +39,4 @@ function onwarn(message) {
     return console.warn(message.message);
   }
 }
+
