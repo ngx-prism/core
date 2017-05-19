@@ -1,12 +1,10 @@
 import { AfterViewInit, Component, Input, ViewEncapsulation } from '@angular/core';
 
-const Prism = require('prismjs');
-
-const template = require('./prism.component.html');
+import 'prismjs';
 
 @Component({
   selector: 'prism-highlight',
-  template,
+  template: `<pre *ngIf="language"><code class="language-{{language}}"><ng-content></ng-content></code></pre>`,
   encapsulation: ViewEncapsulation.None
 })
 export class PrismComponent implements AfterViewInit {
@@ -19,9 +17,26 @@ export class PrismComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.highlightAll(this.async, this.callback);
   }
-  highlightElement(element: any, async: boolean, callback?: (element: Element) => void | undefined) {
 
+  /**
+   * Low-level function, only use if you know what you’re doing. It accepts a string of text as input and the
+   * language definitions to use, and returns a string with the HTML produced.
+   * @param {*} element
+   * @param {boolean} async
+   * @param {((element: Element) => void | undefined)} [callback]
+   * @memberof PrismComponent
+   */
+  highlightElement(element: any, async: boolean, callback?: (element: Element) => void | undefined) {
+    Prism.highlightElement(element, async, callback);
   }
+
+  /**
+   * This is the most high-level function in Prism’s API. It fetches all the elements that have a .language-xxxx
+   * class and then calls Prism.highlightElement() on each one of them.
+   * @param {boolean} async
+   * @param {((element: Element) => void | undefined)} [callback]
+   * @memberof PrismComponent
+   */
   highlightAll(async: boolean, callback?: (element: Element) => void | undefined) {
     Prism.highlightAll(async, callback);
   }
