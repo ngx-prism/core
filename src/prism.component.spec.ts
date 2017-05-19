@@ -6,30 +6,30 @@ import { By } from '@angular/platform-browser';
 import { TestBed, async, inject, ComponentFixture } from '@angular/core/testing';
 
 // internal
-import { TestComponent } from './test.component';
-import { TestModule } from './test.module';
+import { PrismComponent } from './prism.component';
+import { PrismModule } from './prism.module';
 
 beforeAll(() => {
   TestBed.resetTestEnvironment();
   TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 });
 
-describe('TestComponent', () => {
+describe('PrismComponent', () => {
 
-  let comp: TestComponent;
+  let comp: PrismComponent;
   let debugElement: any;
-  let fixture: ComponentFixture<TestComponent>;
+  let fixture: ComponentFixture<PrismComponent>;
   let nativeElement: any;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [TestModule]
+      imports: [PrismModule]
     }).compileComponents();
   }));
 
   // synchronous beforeEach
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponent);
+    fixture = TestBed.createComponent(PrismComponent);
 
     // get from fixture
     comp = fixture.componentInstance;
@@ -41,14 +41,22 @@ describe('TestComponent', () => {
     expect(fixture).toBeDefined();
     expect(comp).toBeTruthy();
   }));
-  it('should have prism-highlight html tag', async(() => {
-    expect(nativeElement.querySelector('prism-highlight')).toBeTruthy();
+  it('should havent pre html ', async(() => {
+    expect(nativeElement.querySelector('pre')).toBeNull();
   }));
-  it('should have `language` property defined', async(() => {
-    expect(comp.language).toBe('html');
-  }));
-  it('should have `ng-content` changed', async(() => {
+  it('should have pre html ', async(() => {
+    comp.language = 'html';
     fixture.detectChanges();
-    expect(nativeElement.querySelector('code').innerText).toBe(comp.content);
+    expect(nativeElement.querySelector('pre')).toBeTruthy();
+  }));
+  it('should have pre > code html ', async(() => {
+    comp.language = 'html';
+    fixture.detectChanges();
+    expect(nativeElement.querySelector('pre > code')).toBeTruthy();
+  }));
+  it('should have class language-html defined ', async(() => {
+    comp.language = 'html';
+    fixture.detectChanges();
+    expect(nativeElement.querySelector('code[class*="language-html"]')).toBeTruthy();
   }));
 });
