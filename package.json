@@ -12,15 +12,16 @@
     "Ścibor Rudnicki <scibor.rudnicki@wwwdev.io>"
   ],
   "scripts": {
-    "clean": "rimraf ./dist",
-    "bundle": "rollup -c rollup.config.js",
-    "prebuild": "npm run clean",
     "build": "./node_modules/.bin/ngc -p tsconfig.json",
+    "bundle": "rollup -c rollup.config.js",
+    "clean": "rimraf ./dist",
+    "html": "cd src && copyfiles **/*.html *.html *.scss **/*.scss ../dist",
     "postbuild": "npm run bundle && npm run html",
+    "prebuild": "npm run clean",
     "prepublish": "npm run build",
     "start": "npm run build",
-    "html": "cd src && copyfiles **/*.html *.html *.scss **/*.scss ../dist",
-    "test": "./node_modules/karma/bin/karma start karma.conf.js"
+    "test": "./node_modules/karma/bin/karma start karma.conf.js",
+    "tslint": "./node_modules/tslint/bin/tslint -p tsconfig.json --force --type-check"
   },
   "license": "MIT",
   "dependencies": {
@@ -36,8 +37,6 @@
     "@types/jasmine": "^2.5.47",
     "@types/karma": "^0.13.35",
     "@types/node": "^7.0.18",
-    "angular2-template-loader": "^0.6.2",
-    "awesome-typescript-loader": "^3.1.3",
     "codelyzer": "^3.0.1",
     "copyfiles": "^1.2.0",
     "core-js": "^2.4.1",
@@ -48,25 +47,22 @@
     "karma-coverage": "^1.1.1",
     "karma-firefox-launcher": "^1.0.1",
     "karma-jasmine": "^1.1.0",
-    "karma-webpack": "^2.0.3",
-    "raw-loader": "^0.5.1",
+    "karma-rollup-plugin": "^0.2.4",
     "reflect-metadata": "^0.1.10",
     "rimraf": "^2.6.1",
     "rollup": "^0.41.6",
+    "rollup-plugin-angular": "^0.4.4",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-typescript": "^0.8.1",
     "rollup-plugin-uglify": "^1.0.2",
     "rxjs": "^5.3.1",
-    "ts-helpers": "^1.1.2",
     "tslint": "^5.2.0",
-    "tslint-loader": "^3.5.3",
     "typescript": "^2.3.2",
-    "webpack": "^2.5.1",
     "zone.js": "^0.8.10"
   },
   "keywords": [
-    "Angular",
-    "Common"
+    "Angular"
   ],
   "repository": {
     "type": "git",
