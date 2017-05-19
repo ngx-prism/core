@@ -1,29 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-const template = require('./test.component.html');
-
 @Component({
   selector: 'test-component',
-  template
+  template: `<prism-highlight [language]="language">{{ngContent}}</prism-highlight>`
 })
 export class TestComponent implements OnInit {
 
   language = 'html';
-  error = 'testError';
-  html = `
-    <table>
-      <tbody>
-        <tr>
-          <td>
-            row
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <p>
-      {{error}}
-      ma extra P
-    </p> ${this.error}`;
+  content = 'ng-content test';
+  ngContent = `${this.content}`;
 
   constructor() { }
 
