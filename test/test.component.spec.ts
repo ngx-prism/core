@@ -1,4 +1,3 @@
-
 // external
 import { NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
