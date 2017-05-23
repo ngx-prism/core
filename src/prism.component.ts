@@ -1,11 +1,14 @@
+// external
 import { AfterViewInit, Component, Input, ViewEncapsulation } from '@angular/core';
-
 import 'prismjs';
 
+// internal
+import template from './prism.component.html';
+
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'prism-highlight',
-  template: `<pre *ngIf="language"><code class="language-{{language}}"><ng-content></ng-content></code></pre>`,
-  encapsulation: ViewEncapsulation.None
+  template
 })
 export class PrismComponent implements AfterViewInit {
   @Input('async') private async = false;
