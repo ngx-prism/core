@@ -1,7 +1,8 @@
 // Karma configuration
 // Generated on Mon Mar 20 2017 15:06:42 GMT+0100 (CET)
 
-const angular = require('rollup-plugin-angular');
+
+// const angular = require('rollup-plugin-angular');
 const commonjs = require('rollup-plugin-commonjs');
 const html = require('rollup-plugin-html');
 const nodeResolve = require('rollup-plugin-node-resolve');
@@ -21,9 +22,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'test/index.ts',
       'test/*.ts',
       'src/*.spec.ts'
     ],
+
 
     plugins: [
       require('karma-coverage'),
@@ -32,16 +35,19 @@ module.exports = function(config) {
       require('karma-jasmine')
     ],    
 
+
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
+
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'test/index.ts': ['rollup'],
       'test/*.ts': ['rollup'],
       'src/*.spec.ts': ['rollup']
     },
+
 
     rollupPreprocessor: {
       context: 'this',
@@ -89,6 +95,7 @@ module.exports = function(config) {
       ],
     },
 
+
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
@@ -111,10 +118,12 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
+
     mime: {
       'text/x-typescript': ['ts','tsx']
     },
-    
+
+
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
