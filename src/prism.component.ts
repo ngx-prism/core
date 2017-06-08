@@ -1,5 +1,10 @@
 // external
-import { AfterViewInit, Component, Input, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  Input,
+  ViewEncapsulation
+} from '@angular/core';
 import 'prismjs';
 
 // internal
@@ -10,14 +15,12 @@ import template from './prism.component.html';
   selector: 'prism-highlight',
   template
 })
-export class PrismComponent implements AfterViewInit {
+export class PrismComponent implements AfterViewChecked {
   @Input('async') private async = false;
   @Input('callback') private callback?: (element: Element) => void | undefined = undefined;
   @Input('language') language: string;
 
-  constructor() { }
-
-  ngAfterViewInit() {
+  ngAfterViewChecked() {
     this.highlightAll(this.async, this.callback);
   }
 
