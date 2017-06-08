@@ -1,4 +1,3 @@
-import angular from 'rollup-plugin-angular';
 import commonjs from 'rollup-plugin-commonjs';
 import html from 'rollup-plugin-html';
 import nodeResolve from 'rollup-plugin-node-resolve';
@@ -14,7 +13,6 @@ export default {
   moduleName: '@ngx-prism/core',
   onwarn,
   plugins: [
-    angular(),
     commonjs({
       namedExports: {
         'node_modules/rxjs/**': ['named']
@@ -49,7 +47,7 @@ export default {
     typescript({
       typescript: require('./node_modules/typescript')
     }),
-    uglify()  
+    uglify()
   ],
   globals: {
     '@angular/core': 'ng.core'
