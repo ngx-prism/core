@@ -12,7 +12,7 @@ import { PrismComponent } from './prism.component';
  */
 @NgModule({
   declarations: [ PrismComponent ],
-  imports: [ CommonModule ],
-  exports: [ PrismComponent ]
+  exports: [ PrismComponent ],
+  imports: [ CommonModule ]
 })
 export class PrismModule { }
