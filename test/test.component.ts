@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import template from './test.component.html';
-
-const selector = 'test-component';
-
 @Component({
-  selector,
-  template
+  selector: 'test-component',
+  template: `<prism-highlight [language]="language">{{ngContent}}</prism-highlight>`
+  // templateUrl: `./test.component.html`
 })
 export class TestComponent implements OnInit {
 
