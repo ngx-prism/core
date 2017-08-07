@@ -1,10 +1,7 @@
 // Karma configuration
-// Generated on Mon Mar 20 2017 15:06:42 GMT+0100 (CET)
 
-
-// const angular = require('rollup-plugin-angular');
 const commonjs = require('rollup-plugin-commonjs');
-const html = require('rollup-plugin-html');
+// const angular = require('rollup-plugin-angular');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const typescript = require('rollup-plugin-typescript');
 
@@ -23,15 +20,14 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'test/index.ts',
-      'test/*.ts',
-      'src/*.spec.ts'
+      'test/*.ts'
     ],
 
 
     plugins: [
       require('karma-coverage'),
       require('karma-chrome-launcher'),
-      require('karma-rollup-plugin'),
+      require('karma-rollup-preprocessor'),
       require('karma-jasmine')
     ],    
 
@@ -45,30 +41,20 @@ module.exports = function(config) {
     preprocessors: {
       'test/index.ts': ['rollup'],
       'test/*.ts': ['rollup'],
-      'src/*.spec.ts': ['rollup']
+      'test/*.js': ['rollup'],
     },
 
 
     rollupPreprocessor: {
       context: 'this',
       // will help to prevent conflicts between different tests entries
-      moduleName: '@ngx-prism/core',
+      moduleName: 'ngxprismcore',
       format: 'iife',
       sourceMap: 'inline',
       // rollup settings. See Rollup documentation
       plugins: [
         // angular(),
-        commonjs({
-          namedExports: {
-            'node_modules/rxjs/**': ['named']
-          }
-        }),
-        html({
-          include: '**/*.html',
-          htmlMinifierOptions: {
-            caseSensitive: true // need to do not lower letter
-          }
-        }),
+        commonjs(),
         nodeResolve({
           // use "es2015" field for ES2015 modules with ES2015 code,
           // if possible
@@ -87,7 +73,7 @@ module.exports = function(config) {
           // – see https://github.com/rollup/rollup-plugin-commonjs
           main: true,  // Default: true
 
-          extensions: [ '.js', '.json', 'html']
+          extensions: [ '.js', '.json' ]
         }),
         typescript({
           typescript: require('./node_modules/typescript')
