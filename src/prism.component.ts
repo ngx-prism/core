@@ -1,12 +1,12 @@
 // external
-import {
-  AfterViewChecked,
-  Component,
-  Input,
-  ViewEncapsulation
-} from '@angular/core';
+import { AfterViewChecked, Component, Input, ViewEncapsulation } from '@angular/core';
 import 'prismjs';
 
+/**
+ * @export
+ * @class PrismComponent
+ * @implements {AfterViewChecked}
+ */
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'prism-highlight',
