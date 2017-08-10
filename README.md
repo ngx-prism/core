@@ -16,6 +16,7 @@ Angular 2+ Component of Prism a lightweight, extensible syntax highlighter, buil
 
 * [Installation](#installation)
 * [Usage](#usage)
+* [Scripts](#scripts)
 * Git
   * [Commit](#commit)
   * [Versioning](#versioning)
@@ -30,6 +31,32 @@ To install, run:
 
 ```bash
 npm install @ngx-prism/core --save
+```
+
+## Scripts
+
+Clone repository:
+```bash
+git clone https://github.com/ngx-prism/core.git
+```
+
+```bash
+go to `./core` folder
+```
+
+To build a clean package, means before that script removes node_modules, dist folder and install dependencies:
+```bash
+npm run start:clean
+```
+
+To build a package:
+```bash
+npm run start
+```
+
+To run karma tests:
+```bash
+npm test
 ```
 
 ## Usage
