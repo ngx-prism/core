@@ -14,7 +14,6 @@ Angular 2+ Component of Prism a lightweight, extensible syntax highlighter, buil
 
 ----
 
-## Table of contents
 * [Installation](#installation)
 * [Usage](#usage)
 * Git
