@@ -3,7 +3,8 @@
 [![npm version](https://badge.fury.io/js/%40ngx-prism%2Fcore.svg)](https://badge.fury.io/js/%40ngx-prism%2Fcore)
 [![GitHub version](https://badge.fury.io/gh/ngx-prism%2Fcore.svg)](https://badge.fury.io/gh/ngx-prism%2Fcore)
 [![Build Status](https://travis-ci.org/ngx-prism/core.svg?branch=master)](https://travis-ci.org/ngx-prism/core)
-[![Known Vulnerabilities](https://snyk.io/test/npm/ngx-prism/badge.svg)](https://snyk.io/test/npm/ngx-prism)
+[![Known Vulnerabilities](https://snyk.io/test/github/ngx-prism/core/badge.svg)](https://snyk.io/test/github/ngx-prism/core)
+
 [![GitHub issues](https://img.shields.io/github/issues/ngx-prism/core.svg)](https://github.com/ngx-prism/core/issues)
 [![GitHub forks](https://img.shields.io/github/forks/ngx-prism/core.svg)](https://github.com/ngx-prism/core/network)
 [![GitHub stars](https://img.shields.io/github/stars/ngx-prism/core.svg)](https://github.com/ngx-prism/core/stargazers)
@@ -11,13 +12,18 @@
 
 Angular 2+ Component of Prism a lightweight, extensible syntax highlighter, built with modern web standards in mind.
 
+----
+
 ## Table of contents
 * [Installation](#installation)
 * [Usage](#usage)
-* [Versioning](#versioning)
-* [Git commit](#git-commit)
+* Git
+  * [Commit](#commit)
+  * [Versioning](#versioning)
 * [License](#license)
 * [Donate](#donate)
+
+----
 
 ## Installation
 
@@ -63,7 +69,13 @@ export class ExampleComponent {
 ```
 
 
-## Versioning
+## GIT
+
+### Commit
+- AngularJS Git Commit Message Conventions https://gist.github.com/stephenparish/9941e89d80e2bc58a153
+- http://karma-runner.github.io/0.10/dev/git-commit-msg.html
+
+### Versioning
 Semantic Versioning 2.0.0 http://semver.org/
 
 **Given a version number MAJOR.MINOR.PATCH, increment the:**   
@@ -80,9 +92,6 @@ How do I know when to release 1.0.0?
 
 >If your software is being used in production, it should probably already be 1.0.0. If you have a stable API on which users have come to depend, you should be 1.0.0. If you’re worrying a lot about backwards compatibility, you should probably already be 1.0.0.
 
-## GIT commit
-- AngularJS Git Commit Message Conventions https://gist.github.com/stephenparish/9941e89d80e2bc58a153
-- http://karma-runner.github.io/0.10/dev/git-commit-msg.html
 
 ## License
 
