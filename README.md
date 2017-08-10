@@ -10,7 +10,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/ngx-prism/core.svg)](https://github.com/ngx-prism/core/stargazers)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/ngx-prism/core/master/LICENSE)
 
-Angular 2+ Component of Prism a lightweight, extensible syntax highlighter, built with modern web standards in mind.
+Simple Angular 2+ Prism a lightweight, extensible syntax highlighter, built with modern web standards in mind.
 
 ----
 
