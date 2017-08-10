@@ -3,12 +3,14 @@ import angular from 'rollup-plugin-angular';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript';
 import uglify from 'rollup-plugin-uglify';
+// (uglify plugin) Error: Error transforming bundle with 'uglify' plugin: Unexpected character '`'
+import { minify } from 'uglify-es'; 
 
 export default {
   entry: 'src/index.ts',
   dest: 'dist/bundle.umd.js',
   exports: 'named',
-  sourceMap: false,
+  sourceMap: true,
   format: 'umd',
   moduleName: '@ngx-prism/core',
   onwarn,
@@ -38,7 +40,7 @@ export default {
     typescript({
       typescript: require('./node_modules/typescript')
     }),
-    uglify()
+    uglify({}, minify)
   ]
 };
 
