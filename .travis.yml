@@ -1,10 +1,10 @@
 language: node_js
 node_js: '6'
+before_install:
+- npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
 deploy:
   provider: npm
   email: scibor.rudnicki@wwwdev.io
-  api_key:
-    secure: NP/lDs0AYPcaOAZF+2cNzdwoUvevRN8UPSwFe65bU8H4kR12uo/ygA6TC7paml537Y/hJOYXgpkS07w6Tf6iXN3eCZyv0IROHcMNIivD5sKU6+g92a/zTSZBv0Svp/Rza8bxetISdqc3HqbkC1mZ3qmhjNzhigfUMs8xBJWlpJFb8BgHbbx9KpGaUImEAdA3NtN45LBccN+GYmnUlheP9w0fbXCoti9ocwmSwDtzamHtzKzQDhdaKLijgnIPnAn9lP8IonxboBmGrI9FvbKplxCk4u4OqvMGBZh8ga+wt5CLD66JEpg3kMCbniWrq9tELX5Qwizga78fN4xU+9Ld5obJr5+FB2W9foR6YPdrNiDXEWLzHwifFb+/Q+idT/2Y0ghI8N7SGOCRVu0WXHJsJPIo4ZFpcskFg3Zf8NOCN1995am8FkPrL7LU8jpV4jZv23MMZBkGeMQh0QYQMWvEpXDl+54cTjKFlZjoKszeJ6rjFYJ0R9yS5BbCvsu9P9Fjw0AAtGxOHNJ8E7WanIMTXunlEHAAXmguf+DrTzt1587VJ3HHVz1iwDQK6T15v/Lri0zhE03J11BARyyP6QW1MWQRaf0NizlgpL0W0wgJQOCphHUiqrOcM8npOGBDmk5XROG8dr+wDKID/LmrsTtgTlTYYmjave9Cg1vYc3hggT0=
   skip_cleanp: true
   on:
     branch: master
@@ -14,3 +14,5 @@ before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - sleep 3
+dd:
+  secure: eVebshxjsjbB3WDmRxXswSDyj1XcVoe7Nn8tA9cgIAZFrw+RbmPi6yss7b0jdZfhvfg8hHIMiFNWfoaGRbilLuFw52HpWbkkXhnBX/Mxb7b4la0GTK0SzfcvkgP/szW2YIL/W7xhdPKNDvL0qFM1XfXw2qNtkqeuoQOlXWgSGd5EuCVj4JLPfbR7nWAbDJvnRgylWEs6Czp3S5QwxCsmBXjWxK0p2KVGcZUkTDQUTjFKyb0h+aYZNJR9fEbcZtoJItD8pg7XL2wDnizcUsmW6+kY7rmbxiwPJXeoFEg+IylNGB3ndBWI/YLUMvj6SLeHN0kOtWEgUfsUKXLcefEE+T9L3rayeE+/qU1pTHSgSFBJX/JgXHCEBcnOypHucgJ8xjIK42Xe+N9LVm3/o1RvDUtTS+Yd1WSBmyhxmS/9pT09OZf6QO5qWpi7J/0rDifCjEHJyTRbT/SNPDsb/LF7TDxmNelvoSWrnUw0eBbJjE8rjgiVt+K+hEZW5yis/NuvbaSLUgsFJVOWnHHOYg0C42k2hRkKKZZUKkdKDdz3bOfcLmxvRGIkN4j//YtjmsjQsrxgS+4PxcgmfEH4U6r5ZP+yUL4GkPHAZS4H6fcdkd1O96PRDnyJcynMbZ9EmbEGhjzpyiaM0mYZ7H/R31+WUNyiaP44vACTVWyLFxvMej4=
