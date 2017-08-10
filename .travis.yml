@@ -1,14 +1,16 @@
 language: node_js
 node_js: '6'
 before_install:
-  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+- echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sleep 3
 deploy:
   provider: npm
   email: scibor.rudnicki@wwwdev.io
+  api_key:
+    secure: PnwTgXEtPiTpL34uaWWoBAnIzlzfirCzeYE1hPTZckFDJIIiigWg1rJ4259z+yvlT+3AL9cFtpOpQctDhw4IsEKxcCUh57ACaA0O+SP4lW95yY2US1j2VlR5uBym4L0nR/m7M4IuX0lFGjYxiRg1yiIdB/4NanPWvxUIwOkjbodtjL7yDaidjbXGo+Zle8uqIf09yXZqxaOl++8a8rJ1StPNKHVzp+7Qa+mq3xkdiM92DkhNO42i9/jdKhEy7ekUatdVkZ5aalnFmUDXmGQ14qed6limMljLe6YtFreEKdFW982SdcKZdM/PeSyCFs/AqjoxHPTIp2o7ndhkajo8LentSXiSckdgGz8cwUgu6MLNP3Pk31/oYcVM3fAV/QTGLbWiH12wfmO2IrQ+0D76lvXe/+L44+4asCxf0LCNgQtdeggW7lSp6XTDpRV2RpSAnEBv34eyMSBabpkcMNQc17jQrtDYK4b1Vw1bvT/nR4zEZFdvizr5P/TZuAvo2ZCfSGVuXaeTZja9R5E1Rd/N1NvyzO6a5jkRqpRFoJ7i2Fr45BEJh8xAFveLFb9s5ogR1y0WgKstnuPgz/KhPxqCadLzdXWE6WKph903gwK0aVGjg89RU6Q2bmfD/abKhbN551UGYABQdcANIEr86SaCtYGA5yCPnvhZZ9ouwdO93H0=
   on:
     tags: true
     repo: ngx-prism/core
