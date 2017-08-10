@@ -10,8 +10,7 @@ import 'prismjs';
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'prism-highlight',
-  template: `<pre class="language-{{language}}" *ngIf="language"><code class="language-{{language}}"><ng-content></ng-content></code></pre>`
-  // templateUrl: './prism.component.html'
+  templateUrl: './prism.component.html'
 })
 export class PrismComponent implements AfterViewChecked {
   @Input('async') private async = false;
