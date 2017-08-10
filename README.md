@@ -33,33 +33,6 @@ To install, run:
 npm install @ngx-prism/core --save
 ```
 
-## Scripts
-
-Clone repository:
-```bash
-git clone https://github.com/ngx-prism/core.git
-```
-
-Go to just created folder:
-```bash
-cd core
-```
-
-To build a clean package, means before that script removes node_modules, dist folder and install dependencies:
-```bash
-npm run start:clean
-```
-
-To build a package:
-```bash
-npm start
-```
-
-To run karma tests:
-```bash
-npm test
-```
-
 ## Usage
 
 1. Import `PrismModule` into your module.
@@ -95,6 +68,32 @@ export class ExampleComponent {
 }
 ```
 
+## Scripts
+
+Clone repository:
+```bash
+git clone https://github.com/ngx-prism/core.git
+```
+
+Go to just created folder:
+```bash
+cd core
+```
+
+To build a clean package, means before that script removes node_modules, dist folder and install dependencies:
+```bash
+npm run start:clean
+```
+
+To build a package:
+```bash
+npm start
+```
+
+To run karma tests:
+```bash
+npm test
+```
 
 ## GIT
 
