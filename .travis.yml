@@ -5,7 +5,9 @@ deploy:
   email: scibor.rudnicki@wwwdev.io
   api_key:
     secure: NP/lDs0AYPcaOAZF+2cNzdwoUvevRN8UPSwFe65bU8H4kR12uo/ygA6TC7paml537Y/hJOYXgpkS07w6Tf6iXN3eCZyv0IROHcMNIivD5sKU6+g92a/zTSZBv0Svp/Rza8bxetISdqc3HqbkC1mZ3qmhjNzhigfUMs8xBJWlpJFb8BgHbbx9KpGaUImEAdA3NtN45LBccN+GYmnUlheP9w0fbXCoti9ocwmSwDtzamHtzKzQDhdaKLijgnIPnAn9lP8IonxboBmGrI9FvbKplxCk4u4OqvMGBZh8ga+wt5CLD66JEpg3kMCbniWrq9tELX5Qwizga78fN4xU+9Ld5obJr5+FB2W9foR6YPdrNiDXEWLzHwifFb+/Q+idT/2Y0ghI8N7SGOCRVu0WXHJsJPIo4ZFpcskFg3Zf8NOCN1995am8FkPrL7LU8jpV4jZv23MMZBkGeMQh0QYQMWvEpXDl+54cTjKFlZjoKszeJ6rjFYJ0R9yS5BbCvsu9P9Fjw0AAtGxOHNJ8E7WanIMTXunlEHAAXmguf+DrTzt1587VJ3HHVz1iwDQK6T15v/Lri0zhE03J11BARyyP6QW1MWQRaf0NizlgpL0W0wgJQOCphHUiqrOcM8npOGBDmk5XROG8dr+wDKID/LmrsTtgTlTYYmjave9Cg1vYc3hggT0=
+  skip_cleanp: true
   on:
+    branch: master
     tags: true
     repo: ngx-prism/core
 before_script:
