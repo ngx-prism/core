@@ -14,11 +14,7 @@ export default {
   onwarn,
   plugins: [
     angular(),
-    commonjs({
-      namedExports: {
-        'node_modules/rxjs/**': ['named']
-      }
-    }),
+    commonjs(),
     nodeResolve({
       // use "es2015" field for ES2015 modules with ES2015 code,
 	    // if possible
