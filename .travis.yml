@@ -1,7 +1,5 @@
 language: node_js
 node_js: '6'
-before_install:
-- echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
 before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
@@ -10,7 +8,7 @@ deploy:
   provider: npm
   email: scibor.rudnicki@wwwdev.io
   api_key:
-    secure: S5nZIFHPb10j23Hw8WqwCKT7G6k5sI163Vd94FIycBEPzoDBr0QpxORR+R05sPgnFpFzUoJ9xbl0UDZR9gWJXAczR83xqYEqTvqyWv4jGeoxSjQVnOOxNeoqQ/YF7CTTZlgx9I4NfHu8fnXb2//ZRslFdUTA/OoMZ1/aRlmbyC6NAbG+epjrLfU1lV2ICG8b4WWN2ImUC7X+1cem9zE+gr7Q2b/LkxOYYxOiAgUg40A8evA+Ol/H5r6hwANMh6ZOnJmr3fB2W9UREqNRwgqYDdXoD1Ds//wmdiASzKqd+jDfsFxPlmrMPg6g5LhjFPeWEyysZna1qmnfV88DWQTA4fdIoY+fL2tf463U9J7KntGEXeBD/JIGmeawb5vYS5hjnB9a3DXWe2c3TYFfHo6zBwIfy9KsJ4nUjk9mjAzBudKsam4Mx86DudqfyNoff5TCmkbvkS+Lg6DAeR8VeR1xTKeiFLEs+S5ja13xCae+g86bGgq4t04jz6YO47q7h9YTGXiku/xkFGUGWskzdGI5pWCAiPdEC9615FxaztHXAcQQjht6lHW8EnRlbB4f7tMNbjHFo/enUybIR9XWsEJy2NN+zA8uGYk/zue9hleCUJrj9Bk6cSwP5hxQMqI2Bzjjqznw0K6MpVgWb5jztMnLV60laTfSMnJYGsrzoAEb4S8=
+    secure: NP/lDs0AYPcaOAZF+2cNzdwoUvevRN8UPSwFe65bU8H4kR12uo/ygA6TC7paml537Y/hJOYXgpkS07w6Tf6iXN3eCZyv0IROHcMNIivD5sKU6+g92a/zTSZBv0Svp/Rza8bxetISdqc3HqbkC1mZ3qmhjNzhigfUMs8xBJWlpJFb8BgHbbx9KpGaUImEAdA3NtN45LBccN+GYmnUlheP9w0fbXCoti9ocwmSwDtzamHtzKzQDhdaKLijgnIPnAn9lP8IonxboBmGrI9FvbKplxCk4u4OqvMGBZh8ga+wt5CLD66JEpg3kMCbniWrq9tELX5Qwizga78fN4xU+9Ld5obJr5+FB2W9foR6YPdrNiDXEWLzHwifFb+/Q+idT/2Y0ghI8N7SGOCRVu0WXHJsJPIo4ZFpcskFg3Zf8NOCN1995am8FkPrL7LU8jpV4jZv23MMZBkGeMQh0QYQMWvEpXDl+54cTjKFlZjoKszeJ6rjFYJ0R9yS5BbCvsu9P9Fjw0AAtGxOHNJ8E7WanIMTXunlEHAAXmguf+DrTzt1587VJ3HHVz1iwDQK6T15v/Lri0zhE03J11BARyyP6QW1MWQRaf0NizlgpL0W0wgJQOCphHUiqrOcM8npOGBDmk5XROG8dr+wDKID/LmrsTtgTlTYYmjave9Cg1vYc3hggT0=
   on:
     tags: true
     repo: ngx-prism/core
