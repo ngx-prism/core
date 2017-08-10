@@ -40,8 +40,9 @@ Clone repository:
 git clone https://github.com/ngx-prism/core.git
 ```
 
+Go to just created folder:
 ```bash
-go to `./core` folder
+cd core
 ```
 
 To build a clean package, means before that script removes node_modules, dist folder and install dependencies:
@@ -51,7 +52,7 @@ npm run start:clean
 
 To build a package:
 ```bash
-npm run start
+npm start
 ```
 
 To run karma tests:
