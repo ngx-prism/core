@@ -14,12 +14,13 @@
   "scripts": {
     "build": "./node_modules/.bin/ngc -p tsconfig.json",
     "bundle": "rollup -c rollup.config.js",
-    "clean": "rimraf ./dist",
+    "clean": "rimraf ./dist && rimraf node_modules",
     "html": "cd src && copyfiles **/*.html *.html *.scss **/*.scss ../dist",
     "postbuild": "npm run html && npm run bundle",
     "prebuild": "",
     "prepublish": "npm run build",
     "start": "npm run build",
+    "start:clean": "npm run clean && npm install && npm start",
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
     "tslint": "./node_modules/tslint/bin/tslint -p tsconfig.json --force --type-check"
   },
@@ -60,6 +61,7 @@
     "rxjs": "^5.4.2",
     "tslint": "^5.6.0",
     "typescript": "^2.4.2",
+    "uglify-es": "^3.0.27",
     "yarn": "^0.27.5",
     "zone.js": "^0.8.16"
   },
