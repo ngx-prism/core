@@ -51,6 +51,7 @@
     "reflect-metadata": "^0.1.10",
     "rimraf": "^2.6.1",
     "rollup": "^0.45.2",
+    "rollup-plugin-angular": "^0.4.11",
     "rollup-plugin-commonjs": "^8.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-string": "^2.0.2",
