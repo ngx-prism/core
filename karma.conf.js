@@ -1,7 +1,7 @@
 // Karma configuration
 
 const commonjs = require('rollup-plugin-commonjs');
-// const angular = require('rollup-plugin-angular');
+const angular = require('rollup-plugin-angular');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const typescript = require('rollup-plugin-typescript');
 
@@ -19,7 +19,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/index.ts',
       'test/*.ts'
     ],
 
@@ -27,6 +26,7 @@ module.exports = function(config) {
     plugins: [
       require('karma-coverage'),
       require('karma-chrome-launcher'),
+      require('karma-firefox-launcher'),
       require('karma-rollup-preprocessor'),
       require('karma-jasmine')
     ],    
@@ -39,7 +39,6 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/index.ts': ['rollup'],
       'test/*.ts': ['rollup']
     },
 
@@ -52,7 +51,7 @@ module.exports = function(config) {
       sourceMap: 'inline',
       // rollup settings. See Rollup documentation
       plugins: [
-        // angular(),
+        angular(),
         commonjs(),
         nodeResolve({
           // use "es2015" field for ES2015 modules with ES2015 code,
@@ -111,12 +110,12 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['Firefox'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: true,
 
     // Concurrency level
     // how many browser should be started simultaneous
