@@ -12,7 +12,8 @@
     "Ścibor Rudnicki <scibor.rudnicki@wwwdev.io>"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "scripts": {
     "build": "./node_modules/.bin/ngc -p tsconfig.json",
