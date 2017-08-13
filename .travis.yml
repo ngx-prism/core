@@ -8,8 +8,7 @@ deploy:
   skip_cleanp: true
   api_key: $NPM_TOKEN
   on:
-    branch: master
-    tags: false
+    tags: true
     repo: ngx-prism/core
 before_script:
 - export DISPLAY=:99.0
