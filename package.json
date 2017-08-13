@@ -21,10 +21,10 @@
     "clean": "rimraf ./dist && rimraf node_modules",
     "html": "cd src && copyfiles **/*.html *.html *.scss **/*.scss ../dist",
     "postbuild": "npm run html && npm run bundle",
-    "prebuild": "",
-    "prepublish": "npm run build",
+    "prebuild": "npm install",
+    "prepare": "",
     "start": "npm run build",
-    "start:clean": "npm run clean && npm install && npm start",
+    "start:clean": "npm run clean && npm start",
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
     "tslint": "./node_modules/tslint/bin/tslint -p tsconfig.json --force --type-check"
   },
