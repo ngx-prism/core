@@ -5,7 +5,8 @@ before_install:
 deploy:
   provider: npm
   email: ngx-package@wwwdev.io
-  skip_cleanp: true
+  local-dir: dist
+  skip_cleanup: true
   api_key: $NPM_TOKEN
   on:
     tags: true
