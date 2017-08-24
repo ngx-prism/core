@@ -4,7 +4,7 @@ before_install:
 - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
 deploy:
   provider: npm
-  email: scibor.rudnicki@wwwdev.io
+  email: ngx-package@wwwdev.io
   skip_cleanp: true
   api_key: $NPM_TOKEN
   on:
