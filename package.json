@@ -1,6 +1,6 @@
 {
   "name": "@ngx-prism/core",
-  "version": "0.2.22",
+  "version": "0.2.23",
   "description": "Simple Angular 2+ Component of Prism a lightweight, extensible syntax highlighter.",
   "author": "Ścibor Rudnicki <scibor.rudnicki@wwwdev.io> (http://ngx-prism.wwwwdev.io)",
   "homepage": "https://github.com/ngx-prism/core#readme",
