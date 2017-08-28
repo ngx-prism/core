@@ -5,6 +5,9 @@ before_install:
 deploy:
   provider: npm
   email: ngx-package@wwwdev.io
+  file_glob: true
+  file: "dist/*"
+  local-dir: dist
   skip_cleanup: true
   api_key: $NPM_TOKEN
   on:
