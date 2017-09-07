@@ -35,7 +35,7 @@ npm install @ngx-prism/core --save
 
 ## Usage
 
-1.Import `PrismModule` into your module.
+1. Import `PrismModule` into your module.
 
 ```typescript
 // example.module.ts
@@ -53,7 +53,7 @@ import { ExampleComponent } from './example.component';
 export class ExampleModule { }
 ```
 
-2.Use prism component in your example component.
+2. Use prism component in your example component.
 
 ```typescript
 // example.component.ts
@@ -106,12 +106,12 @@ npm test
 
 ### Commit
 
-- AngularJS Git Commit Message Conventions https://gist.github.com/stephenparish/9941e89d80e2bc58a153   
-- http://karma-runner.github.io/0.10/dev/git-commit-msg.html
+- [AngularJS Git Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)   
+- [Karma Git Commit Msg](http://karma-runner.github.io/0.10/dev/git-commit-msg.html)
 
 ### Versioning
 
-Semantic Versioning 2.0.0 http://semver.org/
+[Semantic Versioning 2.0.0](http://semver.org/)
 
 **Given a version number MAJOR.MINOR.PATCH, increment the:**
 MAJOR version when you make incompatible API changes,
