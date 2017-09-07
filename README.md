@@ -106,8 +106,8 @@ npm test
 
 ### Commit
 
--AngularJS Git Commit Message Conventions https://gist.github.com/stephenparish/9941e89d80e2bc58a153
--http://karma-runner.github.io/0.10/dev/git-commit-msg.html
+- AngularJS Git Commit Message Conventions https://gist.github.com/stephenparish/9941e89d80e2bc58a153   
+- http://karma-runner.github.io/0.10/dev/git-commit-msg.html
 
 ### Versioning
 
