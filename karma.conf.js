@@ -1,7 +1,6 @@
 // Karma configuration
 
 const angular = require('rollup-plugin-angular');
-const buble = require('rollup-plugin-buble');
 const commonjs = require('rollup-plugin-commonjs');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const typescript = require('rollup-plugin-typescript');
@@ -58,9 +57,9 @@ module.exports = function(config) {
 
     rollupPreprocessor: {
       // will help to prevent conflicts between different tests entries
-      moduleName: 'ngx-prism.core',
+      name: 'ngx-prism.core',
       format: 'umd',
-      sourceMap: 'inline',
+      sourcemap: 'inline',
       // rollup settings. See Rollup documentation
       plugins: [
         angular({
@@ -120,8 +119,13 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress', 'coverage', 'kjhtml'],
 
+    // optionally, configure the reporter
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
 
     // web server port
     port: 9876,
