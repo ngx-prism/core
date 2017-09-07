@@ -17,9 +17,10 @@
     "preserveConstEnums": true,
     "skipLibCheck": true,
     "sourceMap": true,
+    "removeComments": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "es5",
+    "target": "es2015",
     "typeRoots": [
       "./node_modules/@types"
     ],
@@ -29,7 +30,7 @@
     ]
   },
   "files": [
-    "src/index.ts",
-    "typings.d.ts"
+    "src/index.ts"
   ]
+  // "exclude": [] // The "exclude" property defaults to excluding the node_modules, bower_components, jspm_packages and <outDir> directories when not specified.
 }
