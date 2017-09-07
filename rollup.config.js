@@ -1,5 +1,4 @@
 import angular from 'rollup-plugin-angular';
-import buble from 'rollup-plugin-buble';
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript';
@@ -53,7 +52,6 @@ export default {
         },
       }
     }),
-    buble(),
     commonjs(),
     nodeResolve({
       // use "module" field for ES6 module if possible
