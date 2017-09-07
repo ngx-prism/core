@@ -1,7 +1,7 @@
-/// <reference path="../typings/index.d.ts" />
+/// <reference path="./../typings/index.d.ts" />
 // external
 import { AfterViewChecked, Component, Input, ViewEncapsulation } from '@angular/core';
-import { default as Prism } from 'prismjs';
+import Prism from 'prismjs';
 
 /**
  * @export

@@ -1,3 +1,4 @@
+declare var Prism;
 declare module 'prismjs' {
-  export default prismjs;
+  export default Prism;
 }
