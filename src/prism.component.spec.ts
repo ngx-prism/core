@@ -59,4 +59,32 @@ describe('PrismComponent', () => {
     fixture.detectChanges();
     expect(nativeElement.querySelector('code[class*="language-html"]')).toBeTruthy();
   }));
+  it('should have be working by using code property ', async(() => {
+    comp.language = 'css';
+    comp.code = `
+      .test {
+        text-align: center;
+      }
+    `;
+    fixture.detectChanges();
+    expect(debugElement.nativeElement.querySelector('span.token')).toBeTruthy();
+  }));
+  it('should have callback working', async(() => {
+    comp.language = 'css';
+    comp.async = true;
+    comp.callback = () => {
+      comp.code = `
+        .callback {
+          text-align: center;
+        }
+      `;
+    };
+    comp.code = `
+      .test {
+        text-align: center;
+      }
+    `;
+    fixture.detectChanges();
+    expect(debugElement.nativeElement.querySelector('span.token')).toBeTruthy();
+  }));
 });
