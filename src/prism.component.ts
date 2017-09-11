@@ -1,6 +1,6 @@
 /// <reference path="./../typings/index.d.ts" />
 // external
-import { AfterViewChecked, Component, Input, ViewEncapsulation } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import Prism from 'prismjs';
 
 /**
@@ -14,12 +14,30 @@ import Prism from 'prismjs';
   templateUrl: './prism.component.html'
 })
 export class PrismComponent implements AfterViewChecked {
-  @Input('async') private async = false;
-  @Input('callback') private callback?: (element: Element) => void | undefined = undefined;
-  @Input('language') language: string;
+  _code: string;
+  @Input('code') set code(value: string) {
+    this._code = value;
+  }
+  get code(): string {
+    return this._code;
+  }
+  @Input('async') public async = false;
+  @Input('callback') public callback?: (element: Element) => void | undefined = undefined;
+  @Input('language') public language: string;
+  @ViewChild('codeElementRef') codeElementRef: ElementRef;
 
   ngAfterViewChecked() {
-    this.highlightAll(this.async, this.callback);
+    this.highlight();
+  }
+
+  highlight(): void {
+    if (this.code && this.codeElementRef) {
+      this.codeElementRef.nativeElement.innerHTML = Prism.highlight(this.code, Prism.languages[this.language]);
+    } else if (this.codeElementRef) {
+      this.highlightElement(this.codeElementRef.nativeElement, this.async, this.callback);
+    } else {
+      this.highlightAll(this.async, this.callback);
+    }
   }
 
   /**
@@ -30,7 +48,7 @@ export class PrismComponent implements AfterViewChecked {
    * @param {((element: Element) => void | undefined)} [callback]
    * @memberof PrismComponent
    */
-  highlightElement(element: any, async: boolean, callback?: (element: Element) => void | undefined) {
+  highlightElement(element: any, async: boolean, callback?: (element: Element) => void | undefined): void {
     Prism.highlightElement(element, async, callback);
   }
 
@@ -41,7 +59,7 @@ export class PrismComponent implements AfterViewChecked {
    * @param {((element: Element) => void | undefined)} [callback]
    * @memberof PrismComponent
    */
-  highlightAll(async: boolean, callback?: (element: Element) => void | undefined) {
+  highlightAll(async: boolean, callback?: (element: Element) => void | undefined): void {
     Prism.highlightAll(async, callback);
   }
 }
