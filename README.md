@@ -14,6 +14,7 @@ Simple Angular 2+ Prism a lightweight, extensible syntax highlighter, built with
 
 ----
 
+* [Demo](#demo)
 * [Installation](#installation)
 * [Usage](#usage)
 * [Scripts](#scripts)
@@ -24,6 +25,17 @@ Simple Angular 2+ Prism a lightweight, extensible syntax highlighter, built with
 * [Donate](#donate)
 
 ----
+
+## Demo
+
+[Here](https://github.com/ngx-prism/core/tree/master/demo) is a demo on Angular/cli.
+
+If you want to check demo just do the following actions:
+```bash
+git clone https://github.com/ngx-prism/core.git
+cd core/demo
+npm install && npm start
+```
 
 ## Installation
 
@@ -69,6 +81,24 @@ export class ExampleComponent {
   constructor() { }
 }
 ```
+
+3. Use prism component another way in your example component.
+
+```typescript
+// example.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'example-component',
+  template: `<prism-highlight [language]="language" [code]="content"></prism-highlight>`
+})
+export class ExampleComponent {
+  language = 'html';
+  content = '<p>test</p>';
+  constructor() { }
+}
+```
+
 
 ## Scripts
 
