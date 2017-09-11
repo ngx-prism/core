@@ -21,7 +21,7 @@
     "@angular/platform-browser": "^4.4.0-RC.0",
     "@angular/platform-browser-dynamic": "^4.4.0-RC.0",
     "@angular/router": "^4.4.0-RC.0",
-    "@ngx-prism/core": "file:ngx-prism-core-0.2.27.tgz",
+    "@ngx-prism/core": "^0.3.0",
     "core-js": "^2.5.1",
     "rxjs": "^5.4.3",
     "zone.js": "^0.8.17"
