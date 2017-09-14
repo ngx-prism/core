@@ -31,14 +31,15 @@ Simple Angular 2+ Prism a lightweight, extensible syntax highlighter, built with
 
 ## Demonstration
 
-[Here](https://github.com/ngx-prism/demo) is a demo on angular-cli.
-
-If you want to check how it works just do the following actions:
+If you want to see how **@ngx-prism** works with **@angular/cli**, you can see simple example demonstration usage [here](https://github.com/ngx-prism/demo).    
+Open your command line and just do the following actions:
 
 ```bash
 git clone https://github.com/ngx-prism/demo.git
 npm install && npm start
 ```
+
+Open http://localhost:4200/ in your browser.
 
 ## Installation
 
@@ -89,7 +90,7 @@ export class ExampleComponent {
 }
 ```
 
-3. Use prism component another way in your example component.
+Use prism component another way in your example component.
 
 ```typescript
 // example.component.ts
@@ -110,7 +111,7 @@ export class ExampleComponent {
 }
 ```
 
-4. It is possible to import themes files in angular-cli like below.
+* It is possible to import themes files in angular-cli like below.
 
 ```css
 @import '~@ngx-prism/core/dist/themes/prism-coy.css';
