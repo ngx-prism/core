@@ -31,8 +31,7 @@ Simple Angular 2+ Prism a lightweight, extensible syntax highlighter, built with
 
 ## Demonstration
 
-If you want to see how **@ngx-prism** works with **@angular/cli**, you can see simple example demonstration usage [here](https://github.com/ngx-prism/demo).    
-Open your command line and just do the following actions:
+If you want to see how **@ngx-prism** works with **@angular/cli**, get simple example demonstration usage from github [repository](https://github.com/ngx-prism/demo) by opening your command line and do the following:
 
 ```bash
 git clone https://github.com/ngx-prism/demo.git
