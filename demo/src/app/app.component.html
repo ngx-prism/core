@@ -1,22 +1,26 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<h2>Here is an example of working @ngx-prism/core </h2>
+<h1>Here is an example of working @ngx-prism/core </h1>
+<h2>
+  Component: prism-highlight
+</h2>
 <div>
-  <h2>
-    CSS with optional language
-  </h2>
+  <h3>
+    Optional language: {{language}}
+  </h3>
   <p>
     <input type="radio" name="language" value="css" (change)="setLanguage($event)" [attr.checked] = "language === 'css' ? 'checked' : null" /> CSS
+    <input type="radio" name="language" value="html" (change)="setLanguage($event)" [attr.checked] = "language === 'html' ? 'checked' : null" /> HTML
     <input type="radio" name="language" value="javascript" (change)="setLanguage($event)" [attr.checked] = "language === 'javascript' ? 'checked' : null" /> JAVASCRIPT
   </p>
-  <textarea rows="20" cols="50" name="prism" (keyup)="update($event)" [innerHTML]="prism"></textarea>
+  <textarea rows="10" cols="50" name="prism" (keyup)="update($event)" [innerHTML]="prism"></textarea>
   <prism-highlight [language]="language">{{prism}}</prism-highlight>
   <prism-highlight [language]="language" [code]="prism"></prism-highlight>
 </div>
 <div>
-  <h2>
+  <h3>
     html ng-content
-  </h2>
-  <textarea rows="20" cols="50" name="prismhtml" (keyup)="update($event)" [innerHTML]="prismhtml"></textarea>
-  <prism-highlight [language]="'html'" [callback] = "callback">{{prismhtml}}</prism-highlight>
-  <prism-highlight [language]="'html'" [code]="prismhtml"></prism-highlight>
+  </h3>
+  <textarea rows="5" cols="50" name="prismhtml" (keyup)="update($event)" [innerHTML]="prismhtml"></textarea>
+  <prism-highlight [language]="language" [callback] = "callback">{{prismhtml}}</prism-highlight>
+  <prism-highlight [language]="language" [code]="prismhtml"></prism-highlight>
 </div>
