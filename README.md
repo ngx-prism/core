@@ -17,6 +17,9 @@ Simple Angular 2+ Prism a lightweight, extensible syntax highlighter, built with
 * [Demo](#demo)
 * [Installation](#installation)
 * [Usage](#usage)
+* [PrismComponent](#prismcomponent)
+  * [@Input](#input)
+  * [Lifecycle Hooks](#lifecycle-hooks)
 * [Scripts](#scripts)
 * Git
   * [Commit](#commit)
@@ -73,7 +76,11 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'example-component',
-  template: `<prism-highlight [language]="language">{{content}}</prism-highlight>`
+  template: `
+    <prism-highlight [language]="language">
+      {{content}}
+    </prism-highlight>
+  `
 })
 export class ExampleComponent {
   language = 'html';
@@ -90,7 +97,11 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'example-component',
-  template: `<prism-highlight [language]="language" [code]="content"></prism-highlight>`
+  template: `
+    <prism-highlight
+      [language]="language"
+      [code]="content"
+    ></prism-highlight>`
 })
 export class ExampleComponent {
   language = 'html';
@@ -99,6 +110,36 @@ export class ExampleComponent {
 }
 ```
 
+## PrismComponent
+
+It is designed to use `ng-content` and property `code` separately. You can **NOT** use both the same time.
+
+### @Input
+
+| name | Type | Description |
+|----------|----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| async | boolean | "Whether to use Web Workers to improve performance and avoid blocking the UI when highlighting very large chunks of code." |
+| callback | (element: Element) => void \| undefined = undefined | "An optional callback to be invoked after the highlighting is done. Mostly useful when async is true, since in that case, the highlighting is done asynchronously."  |
+| code | string | "A string with the code to be highlighted." |
+| language | string | "Valid language identifier, for example 'javascript', 'css'." |
+
+
+### Lifecycle Hooks
+
+[Angular Lifecycle Hooks](https://angular.io/guide/lifecycle-hooks)
+
+**ngAfterViewInit()**    
+Performs `highlight()` method only when property `changed` is set to `false`.
+
+**ngAfterViewChecked()**    
+Performs `highlight()` method when `ng-content` is used, and also property `language` is changed.
+
+**ngOnChanges()**    
+Detect input property `code` or `language` changes by comparing `currentValue` to `previousValue`.    
+If yes, set component property `changed` to `true`.    
+
+**ngOnInit()**    
+Performs `highlight()` method when property `code` is defined and `changed` is set to `true`, and `callback()` method.
 
 ## Scripts
 
