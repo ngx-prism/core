@@ -110,6 +110,20 @@ export class ExampleComponent {
 }
 ```
 
+4. It is possible to import themes files in angular-cli like below.
+
+```css
+@import '~@ngx-prism/core/dist/themes/prism-coy.css';
+@import '~@ngx-prism/core/dist/themes/prism-dark.css';
+@import '~@ngx-prism/core/dist/themes/prism-funky.css';
+@import '~@ngx-prism/core/dist/themes/prism-okaidia.css';
+@import '~@ngx-prism/core/dist/themes/prism-solarizedlight.css';
+@import '~@ngx-prism/core/dist/themes/prism-tomorrow.css';
+@import '~@ngx-prism/core/dist/themes/prism-twilight.css';
+@import '~@ngx-prism/core/dist/themes/prism.css';
+```
+
+
 ## PrismComponent
 
 It is designed to use `ng-content` and property `code` separately. You can **NOT** use both the same time.
