@@ -72,8 +72,8 @@ export class PrismComponent extends PrismClass implements AfterViewChecked, Afte
    * @memberof PrismComponent
    */
   ngOnInit() {
-    if (this.code && this.changed === true) {
-      this.highlight(true);
+    if (this.code && typeof (this.code) === 'string' && ( typeof (this.changed) === 'boolean' && this.changed === true)) {
+      this.highlight(this.changed);
       if (this.callback) {
         this.callback(this.codeElementRef.nativeElement);
       }
