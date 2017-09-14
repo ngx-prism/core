@@ -1,7 +1,20 @@
-/// <reference path="./../typings/index.d.ts" />
 // external
-import { AfterViewChecked, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
-import Prism from 'prismjs';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
+
+// internal
+import { PrismClass } from './prism.class';
+import { CallbackType } from './prism.type';
 
 /**
  * @export
@@ -13,53 +26,57 @@ import Prism from 'prismjs';
   selector: 'prism-highlight',
   templateUrl: './prism.component.html'
 })
-export class PrismComponent implements AfterViewChecked {
-  _code: string;
-  @Input('code') set code(value: string) {
-    this._code = value;
-  }
-  get code(): string {
-    return this._code;
-  }
-  @Input('async') public async = false;
-  @Input('callback') public callback?: (element: Element) => void | undefined = undefined;
-  @Input('language') public language: string;
-  @ViewChild('codeElementRef') codeElementRef: ElementRef;
+export class PrismComponent extends PrismClass implements AfterViewChecked, AfterViewInit, OnChanges, OnInit {
 
-  ngAfterViewChecked() {
-    this.highlight();
+  /**
+   * ngAfterViewInit
+   * Execute method `highlight()` once after view init and property `changed` is set to `false`.
+   * @memberof PrismComponent
+   */
+  ngAfterViewInit() {
+    this.highlight(false);
   }
 
-  highlight(): void {
-    if (this.code && this.codeElementRef) {
-      this.codeElementRef.nativeElement.innerHTML = Prism.highlight(this.code, Prism.languages[this.language]);
-    } else if (this.codeElementRef) {
-      this.highlightElement(this.codeElementRef.nativeElement, this.async, this.callback);
-    } else {
-      this.highlightAll(this.async, this.callback);
+  /**
+   * After every view check execute method `highlight()` and set property `changed` to `false`.
+   * @memberof PrismComponent
+   */
+  ngAfterViewChecked(): void {
+    this.highlight(true);
+  }
+
+  /**
+   * ngOnChanges
+   * @param {SimpleChanges} changes
+   * @memberof PrismComponent
+   */
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes) {
+      if (changes.hasOwnProperty('code')) {
+        if (changes.code.currentValue !== changes.code.previousValue) {
+          this.changed = true;
+        }
+      }
+      if (changes.hasOwnProperty('language')) {
+        if (changes.language.currentValue !== changes.language.previousValue) {
+          this.changed = true;
+        }
+      }
     }
   }
 
   /**
-   * Low-level function, only use if you know what you’re doing. It accepts a string of text as input and the
-   * language definitions to use, and returns a string with the HTML produced.
-   * @param {*} element
-   * @param {boolean} async
-   * @param {((element: Element) => void | undefined)} [callback]
+   * ngOnInit
+   * Execute `highlight()` method if property `code` is assigned, and also property `changed` is set to `true`.
+   * Highlighted string result is assigned to `codeElementRef` inner html.
    * @memberof PrismComponent
    */
-  highlightElement(element: any, async: boolean, callback?: (element: Element) => void | undefined): void {
-    Prism.highlightElement(element, async, callback);
-  }
-
-  /**
-   * This is the most high-level function in Prism’s API. It fetches all the elements that have a .language-xxxx
-   * class and then calls Prism.highlightElement() on each one of them.
-   * @param {boolean} async
-   * @param {((element: Element) => void | undefined)} [callback]
-   * @memberof PrismComponent
-   */
-  highlightAll(async: boolean, callback?: (element: Element) => void | undefined): void {
-    Prism.highlightAll(async, callback);
+  ngOnInit() {
+    if (this.code && this.changed === true) {
+      this.highlight(true);
+      if (this.callback) {
+        this.callback(this.codeElementRef.nativeElement);
+      }
+    }
   }
 }
