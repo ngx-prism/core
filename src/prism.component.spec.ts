@@ -59,7 +59,7 @@ describe('PrismComponent', () => {
     fixture.detectChanges();
     expect(nativeElement.querySelector('code[class*="language-html"]')).toBeTruthy();
   }));
-  it('should have be working by using code property ', async(() => {
+  it('should have been working by using `code` property ', async(() => {
     comp.language = 'css';
     comp.code = `
       .test {
@@ -72,7 +72,7 @@ describe('PrismComponent', () => {
   it('should have callback working', async(() => {
     comp.language = 'css';
     comp.async = true;
-    comp.callback = () => {
+    comp.callback = (element) => {
       comp.code = `
         .callback {
           text-align: center;
