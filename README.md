@@ -14,7 +14,7 @@ Simple Angular 2+ Prism a lightweight, extensible syntax highlighter, built with
 
 ----
 
-* [Demo](#demo)
+* [Demonstration](#demonstration)
 * [Installation](#installation)
 * [Usage](#usage)
 * [PrismComponent](#prismcomponent)
@@ -29,14 +29,14 @@ Simple Angular 2+ Prism a lightweight, extensible syntax highlighter, built with
 
 ----
 
-## Demo
+## Demonstration
 
-[Here](https://github.com/ngx-prism/core/tree/master/demo) is a demo on Angular/cli.
+[Here](https://github.com/ngx-prism/demo) is a demo on angular-cli.
 
-If you want to check demo just do the following actions:
+If you want to check how it works just do the following actions:
+
 ```bash
-git clone https://github.com/ngx-prism/core.git
-cd core/demo
+git clone https://github.com/ngx-prism/demo.git
 npm install && npm start
 ```
 
