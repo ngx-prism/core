@@ -97,8 +97,8 @@
       "check-type"
     ],
 
-    "directive-selector": [true, "attribute", "", "camelCase"],
-    "component-selector": [true, "element", "", "kebab-case"],
+    "directive-selector": [true, "attribute", "prismHighlight", "camelCase"],
+    "component-selector": [true, "element", "prism-highlight", "kebab-case"],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
