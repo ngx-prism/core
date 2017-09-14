@@ -40,14 +40,24 @@ describe('TestComponent', () => {
     expect(fixture).toBeDefined();
     expect(comp).toBeTruthy();
   }));
-  it('should have prism-highlight html tag', async(() => {
+  it('should have `prism-highlight` html tag', async(() => {
     expect(nativeElement.querySelector('prism-highlight')).toBeTruthy();
   }));
   it('should have `language` property defined', async(() => {
     expect(comp.language).toBe('html');
   }));
-  it('should have `ng-content` changed', async(() => {
+  it('should have component `ng-content` changed.', async(() => {
     fixture.detectChanges();
     expect(nativeElement.querySelector('code').innerText).toBe(comp.content);
+  }));
+
+  // Test `code` property.
+  it('should have component property `code` with css working.', async(() => {
+    fixture.detectChanges();
+    expect(nativeElement.querySelector('prism-highlight[id="css"]').innerText).toContain(`text-align`);
+  }));
+  it('should have component property `code` with html working.', async(() => {
+    fixture.detectChanges();
+    expect(nativeElement.querySelector('prism-highlight[id="html"]').innerText).toContain(`My p`);
   }));
 });
