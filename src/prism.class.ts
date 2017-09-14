@@ -29,14 +29,14 @@ export abstract class PrismClass {
   /**
    * An optional callback to be invoked after the highlighting is done.
    * Mostly useful when async is true, since in that case, the highlighting is done asynchronously.
-   * @memberof PrismComponent
+   * @memberof PrismClass
    */
   @Input('callback') public callback?: CallbackType | undefined = undefined;
 
   /**
    * A string with the code to be highlighted.
    * @type {string}
-   * @memberof PrismComponent
+   * @memberof PrismClass
    */
   _code: string;
   @Input('code') set code(value: string) {
@@ -49,14 +49,14 @@ export abstract class PrismClass {
   /**
    * "The element containing the code. It must have a class of language-xxxx to be processed, where xxxx is a valid language identifier."
    * @type {ElementRef}
-   * @memberof PrismComponent
+   * @memberof PrismClass
    */
   @ViewChild('codeElementRef') protected codeElementRef: ElementRef;
 
   /**
    * Valid language identifier.
    * @type {string}
-   * @memberof PrismComponent
+   * @memberof PrismClass
    */
   @Input('language') public language: string;
 
@@ -83,7 +83,9 @@ export abstract class PrismClass {
    * @memberof PrismClass
    */
   highlightCode(): void {
-    this.codeElementRef.nativeElement.innerHTML = Prism.highlight(this.code, Prism.languages[this.language]);
+    if (typeof (this.code) === 'string' && typeof (this.language) === 'string') {
+      this.codeElementRef.nativeElement.innerHTML = Prism.highlight(this.code, Prism.languages[this.language]);
+    }
   }
 
   /**
