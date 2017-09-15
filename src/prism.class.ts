@@ -7,6 +7,7 @@ import {
   ViewChild
 } from '@angular/core';
 import Prism from 'prismjs';
+import * as _ from 'lodash-es';
 
 // internal
 import { CallbackType } from './prism.type';
@@ -61,6 +62,13 @@ export abstract class PrismClass {
   @Input('language') public language: string;
 
   /**
+   * Interpolate property `code`.
+   * @protected
+   * @memberof PrismClass
+   */
+  @Input('interpolation') protected interpolation = false;
+
+  /**
    * Use highlight method depends on recevied boolean parameter `changed`.
    * @param {boolean} [changed=false]
    * @memberof PrismClass
@@ -84,6 +92,9 @@ export abstract class PrismClass {
    */
   highlightCode(): void {
     if (typeof (this.code) === 'string' && typeof (this.language) === 'string') {
+      if (typeof (this.interpolation) === 'boolean' && this.interpolation === true) {
+        this.interpolationCode();
+      }
       this.codeElementRef.nativeElement.innerHTML = Prism.highlight(this.code, Prism.languages[this.language]);
     }
   }
@@ -94,5 +105,10 @@ export abstract class PrismClass {
    */
   highlightElement(): void {
     Prism.highlightElement(this.codeElementRef.nativeElement, this.async, this.callback);
+  }
+
+  interpolationCode(): void {
+    // Use custom template delimiters.
+    this.code = _.template(this.code, { interpolate: /{{([\s\S]+?)}}/g })(this);
   }
 }
