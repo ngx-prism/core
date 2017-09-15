@@ -11,7 +11,7 @@ export class TestComponent implements OnInit {
   ngContent = `${this.content}`;
   code = {
     css: `.myCss { text-align: center; }`,
-    html: `<p align="center" style="">My p</p>`
+    html: `<p align="center" style="">My p {{language}}</p>`
   };
 
   constructor() { }
