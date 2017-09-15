@@ -1,4 +1,1 @@
-<pre class="language-{{language}}" *ngIf="language">
-  <code class="language-{{language}}" *ngIf="!code" #codeElementRef><ng-content></ng-content></code>
-  <code class="language-{{language}}" *ngIf="code" #codeElementRef></code>
-</pre>
+<pre class="language-{{language}}" *ngIf="language"><code #codeElementRef class="language-{{language}}"><ng-content *ngIf="!code"></ng-content></code></pre>
