@@ -59,5 +59,10 @@ describe('TestComponent', () => {
   it('should have component property `code` with html working.', async(() => {
     fixture.detectChanges();
     expect(nativeElement.querySelector('prism-highlight[id="html"]').innerText).toContain(`My p`);
+    console.info(nativeElement.querySelector('prism-highlight[id="interpolation"]').innerText);
+  }));
+  it('should have component property `code` with html and interpolation working.', async(() => {
+    fixture.detectChanges();
+    expect(nativeElement.querySelector('prism-highlight[id="interpolation"]').innerText).toContain(`My p ${comp.language}`);
   }));
 });
