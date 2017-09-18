@@ -57,6 +57,11 @@ export class PrismComponent extends PrismClass implements AfterViewChecked, Afte
           this.changed = true;
         }
       }
+      if (changes.hasOwnProperty('interpolation')) {
+        if (changes.interpolation.currentValue !== changes.interpolation.previousValue) {
+          this.changed = true;
+        }
+      }
       if (changes.hasOwnProperty('language')) {
         if (changes.language.currentValue !== changes.language.previousValue) {
           this.changed = true;
