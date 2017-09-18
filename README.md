@@ -89,7 +89,7 @@ export class ExampleComponent {
 }
 ```
 
-Use prism component another way in your example component.
+Use `PrismComponent` by providing `code` and `interpolation` property in `ExampleComponent`.
 
 ```typescript
 // example.component.ts
@@ -99,18 +99,19 @@ import { Component } from '@angular/core';
   selector: 'example-component',
   template: `
     <prism-highlight
-      [language]="language"
-      [code]="content"
+      [language] = "language"
+      [code] = "content"
+      [interpolation] = "true"
     ></prism-highlight>`
 })
 export class ExampleComponent {
   language = 'html';
-  content = '<p>test</p>';
+  content = '<p>test {{language}}</p>';
   constructor() { }
 }
 ```
 
-* It is possible to import themes files in angular-cli like below.
+* It is possible to import themes files in `@angular/cli` like below.
 
 ```css
 @import '~@ngx-prism/core/dist/themes/prism-coy.css';
@@ -132,10 +133,11 @@ It is designed to use `ng-content` and property `code` separately. You can **NOT
 
 | name | Type | Description |
 |----------|----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| async | boolean | "Whether to use Web Workers to improve performance and avoid blocking the UI when highlighting very large chunks of code." |
-| callback | (element: Element) => void \| undefined = undefined | "An optional callback to be invoked after the highlighting is done. Mostly useful when async is true, since in that case, the highlighting is done asynchronously."  |
-| code | string | "A string with the code to be highlighted." |
-| language | string | "Valid language identifier, for example 'javascript', 'css'." |
+| async | boolean | Works only with `ng-content`. *"Whether to use Web Workers to improve performance and avoid blocking the UI when highlighting very large chunks of code."* - prismjs |
+| callback | (element: Element) => void \| undefined = undefined | *"An optional callback to be invoked after the highlighting is done. Mostly useful when async is true, since in that case, the highlighting is done asynchronously."* - prismjs  |
+| code | string | *"A string with the code to be highlighted."* - prismjs |
+| **interpolation** | boolean | If `true` property `code` will be interpolated. Does not work with `ng-content`.  |
+| language | string | *"Valid language identifier, for example 'javascript', 'css'."* - prismjs |
 
 
 ### Lifecycle Hooks
