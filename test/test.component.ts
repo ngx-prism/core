@@ -7,11 +7,12 @@ import { Component, OnInit } from '@angular/core';
 export class TestComponent implements OnInit {
 
   language = 'html';
-  content = 'ng-content test';
-  ngContent = `${this.content}`;
+  text = 'ng-content-visible';
+  interpolated = `<span class="my-class">${this.text}</span>`;
   code = {
+    content: `<p align="center">{{interpolated}}</p>`,
     css: `.myCss { text-align: center; }`,
-    html: `<p align="center" style="">My p {{language}}</p>`
+    html: `<p align="center" style="">My p {{interpolated}}</p>`
   };
 
   constructor() { }

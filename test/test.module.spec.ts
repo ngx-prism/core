@@ -46,23 +46,37 @@ describe('TestComponent', () => {
   it('should have `language` property defined', async(() => {
     expect(comp.language).toBe('html');
   }));
-  it('should have component `ng-content` changed.', async(() => {
+
+  // ng-content
+  it('it should have `ng-content` highlighted and interpolated.', () => {
     fixture.detectChanges();
-    expect(nativeElement.querySelector('code').innerText).toBe(comp.content);
+    expect(nativeElement.querySelector('prism-highlight[id="ng-content"]').innerHTML).toContain(comp.text);
+  });
+  it('should have component `ng-content` changed.', async(() => {
+    comp.code.content = `<p align="left">{{interpolated}}</p>`;
+    fixture.detectChanges();
+    expect(nativeElement.querySelector('prism-highlight[id="ng-content"]').innerHTML).toContain(`left`);
   }));
 
   // Test `code` property.
   it('should have component property `code` with css working.', async(() => {
     fixture.detectChanges();
-    expect(nativeElement.querySelector('prism-highlight[id="css"]').innerText).toContain(`text-align`);
+    expect(nativeElement.querySelector('prism-highlight[id="code-css"]').innerText).toContain(`text-align`);
   }));
   it('should have component property `code` with html working.', async(() => {
     fixture.detectChanges();
-    expect(nativeElement.querySelector('prism-highlight[id="html"]').innerText).toContain(`My p`);
-    console.info(nativeElement.querySelector('prism-highlight[id="interpolation"]').innerText);
+    expect(nativeElement.querySelector('prism-highlight[id="code-html"]').innerText).toContain(`My p`);
   }));
   it('should have component property `code` with html and interpolation working.', async(() => {
     fixture.detectChanges();
-    expect(nativeElement.querySelector('prism-highlight[id="interpolation"]').innerText).toContain(`My p ${comp.language}`);
+    expect(nativeElement.querySelector('prism-highlight[id="code-interpolation"]').innerText).toContain(comp.text);
   }));
+  it('should have component property `code` with html and interpolation working.', async(() => {
+    comp.language = 'javascript';
+    comp.code.html = `<p align="center" style="">My p {{language}}</p>`;
+    fixture.detectChanges();
+    expect(nativeElement.querySelector(`code[class="language-${comp.language}"]`)).toBeTruthy();
+    expect(nativeElement.querySelector('prism-highlight[id="code-interpolation"]').innerText).toContain(`My p ${comp.language}`);
+  }));
+
 });

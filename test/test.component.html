@@ -1,7 +1,4 @@
-<prism-highlight id="ngContent" [language]="language">{{ngContent}}</prism-highlight>
-
-<prism-highlight id="css" [language]="'css'" [code]="code.css"></prism-highlight>
-
-<prism-highlight id="html" [language]="'html'" [code]="code.html"></prism-highlight>
-
-<prism-highlight id="interpolation" [interpolation]="true" [language]="'html'" [code]="code.html"></prism-highlight>
+<prism-highlight id="ng-content" [interpolation]="this" [language]="language">{{code.content}}</prism-highlight>
+<prism-highlight id="code-css" [language]="'css'" [code]="code.css"></prism-highlight>
+<prism-highlight id="code-html" [language]="'html'" [code]="code.html"></prism-highlight>
+<prism-highlight id="code-interpolation" [interpolation]="this" [language]="language" [code]="code.html"></prism-highlight>
