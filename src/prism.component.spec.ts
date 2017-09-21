@@ -36,7 +36,6 @@ describe('PrismComponent', () => {
     nativeElement = fixture.nativeElement;
     debugElement = fixture.debugElement;
   });
-
   it('should be defined', async(() => {
     expect(fixture).toBeDefined();
     expect(comp).toBeTruthy();
@@ -58,33 +57,5 @@ describe('PrismComponent', () => {
     comp.language = 'html';
     fixture.detectChanges();
     expect(nativeElement.querySelector('code[class*="language-html"]')).toBeTruthy();
-  }));
-  it('should have been working by using `code` property ', async(() => {
-    comp.language = 'css';
-    comp.code = `
-      .test {
-        text-align: center;
-      }
-    `;
-    fixture.detectChanges();
-    expect(debugElement.nativeElement.querySelector('span.token')).toBeTruthy();
-  }));
-  it('should have callback working', async(() => {
-    comp.language = 'css';
-    comp.async = true;
-    comp.callback = (element) => {
-      comp.code = `
-        .callback {
-          text-align: center;
-        }
-      `;
-    };
-    comp.code = `
-      .test {
-        text-align: center;
-      }
-    `;
-    fixture.detectChanges();
-    expect(debugElement.nativeElement.querySelector('span.token')).toBeTruthy();
   }));
 });
