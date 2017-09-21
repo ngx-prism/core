@@ -101,7 +101,7 @@ import { Component } from '@angular/core';
     <prism-highlight
       [language] = "language"
       [code] = "content"
-      [interpolation] = "true"
+      [interpolation] = "this"
     ></prism-highlight>`
 })
 export class ExampleComponent {
@@ -136,7 +136,7 @@ It is designed to use `ng-content` and property `code` separately. You can **NOT
 | async | boolean | Works only with `ng-content`. *"Whether to use Web Workers to improve performance and avoid blocking the UI when highlighting very large chunks of code."* - prismjs |
 | callback | (element: Element) => void \| undefined = undefined | *"An optional callback to be invoked after the highlighting is done. Mostly useful when async is true, since in that case, the highlighting is done asynchronously."* - prismjs  |
 | code | string | *"A string with the code to be highlighted."* - prismjs |
-| **interpolation** | boolean | If `true` property `code` will be interpolated. Does not work with `ng-content`.  |
+| **interpolation** | Object | undefined | Data property values to inject.  |
 | language | string | *"Valid language identifier, for example 'javascript', 'css'."* - prismjs |
 
 
@@ -144,18 +144,13 @@ It is designed to use `ng-content` and property `code` separately. You can **NOT
 
 [Angular Lifecycle Hooks](https://angular.io/guide/lifecycle-hooks)
 
-**ngAfterViewInit()**    
-Performs `highlight()` method only when property `changed` is set to `false`.
-
 **ngAfterViewChecked()**    
 Performs `highlight()` method when `ng-content` is used, and also property `language` is changed.
 
 **ngOnChanges()**    
 Detect input property `code` or `language` changes by comparing `currentValue` to `previousValue`.    
-If yes, set component property `changed` to `true`.    
-
-**ngOnInit()**    
-Performs `highlight()` method when property `code` is defined and `changed` is set to `true`, and `callback()` method.
+If yes, set component property `change` to `true`.    
+Performs `highlight()` when property `code` is set and property `change` value is set to `true`.
 
 ## Scripts
 
@@ -200,11 +195,12 @@ npm test
 
 [Semantic Versioning 2.0.0](http://semver.org/)
 
-**Given a version number MAJOR.MINOR.PATCH, increment the:**
-MAJOR version when you make incompatible API changes,
-MINOR version when you add functionality in a backwards-compatible manner, and
+**Given a version number MAJOR.MINOR.PATCH, increment the:**  
+MAJOR version when you make incompatible API changes,  
+MINOR version when you add functionality in a backwards-compatible manner, and  
 PATCH version when you make backwards-compatible bug fixes.
-Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
+
+Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.   
 
 **FAQ**
 How should I deal with revisions in the 0.y.z initial development phase?
