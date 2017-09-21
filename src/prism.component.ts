@@ -25,9 +25,8 @@ import { CallbackType } from './prism.type';
   templateUrl: './prism.component.html'
 })
 export class PrismComponent extends PrismClass implements AfterViewChecked, OnChanges {
+
   /**
-   * Every check perform method `highlight()` and set property value `change` to `false`.
-   * It won't happened when property `code` is used, because property `change` is set to false in earlier hook.
    * @memberof PrismComponent
    */
   ngAfterViewChecked(): void {

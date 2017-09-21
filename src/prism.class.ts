@@ -28,7 +28,7 @@ export abstract class PrismClass implements PrismInterface {
    */
   protected change = false;
   /**
-   * If highlight has been done, then set its value to `true`.
+   * If highlight has been done, then set value to `true`.
    * @protected
    * @memberof PrismClass
    */
@@ -98,7 +98,7 @@ export abstract class PrismClass implements PrismInterface {
   @Input('interpolation') public interpolation: Object | undefined;
 
   /**
-   * Interpolate with template options.
+   * Interpolate with specific template options.
    * @private
    * @memberof PrismClass
    */
@@ -138,15 +138,16 @@ export abstract class PrismClass implements PrismInterface {
         } else {
           Prism.highlightElement(this.codeElementRef.nativeElement, this.async, this.callback);
         }
-
+        // highlight is done, do not need to change anymore.
         this.change = false;
+        // highlight is done, mark it.
         this.changed = true;
       }
     }
   }
 
   /**
-   * Observe changes with specific `propertyName`. If found any, set property `change` to `true` and also store them.
+   * Observe changes with specific `propertyName`. If found any, set property `change` to `true`.
    * @protected
    * @param {string} propertyName
    * @param {SimpleChanges} changes
