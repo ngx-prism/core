@@ -1,12 +1,10 @@
 // external
 import {
   AfterViewChecked,
-  AfterViewInit,
   Component,
   ElementRef,
   Input,
   OnChanges,
-  OnInit,
   SimpleChanges,
   ViewChild,
   ViewEncapsulation
@@ -26,60 +24,28 @@ import { CallbackType } from './prism.type';
   selector: 'prism-highlight',
   templateUrl: './prism.component.html'
 })
-export class PrismComponent extends PrismClass implements AfterViewChecked, AfterViewInit, OnChanges, OnInit {
-
+export class PrismComponent extends PrismClass implements AfterViewChecked, OnChanges {
   /**
-   * ngAfterViewInit
-   * Execute method `highlight()` once after view init and property `changed` is set to `false`.
-   * @memberof PrismComponent
-   */
-  ngAfterViewInit() {
-    this.highlight(false);
-  }
-
-  /**
-   * After every view check execute method `highlight()` and set property `changed` to `false`.
+   * Every check perform method `highlight()` and set property value `change` to `false`.
+   * It won't happened when property `code` is used, because property `change` is set to false in earlier hook.
    * @memberof PrismComponent
    */
   ngAfterViewChecked(): void {
     this.highlight(true);
+    this.changed = false;
   }
 
   /**
-   * ngOnChanges
    * @param {SimpleChanges} changes
    * @memberof PrismComponent
    */
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes) {
-      if (changes.hasOwnProperty('code')) {
-        if (changes.code.currentValue !== changes.code.previousValue) {
-          this.changed = true;
-        }
-      }
-      if (changes.hasOwnProperty('interpolation')) {
-        if (changes.interpolation.currentValue !== changes.interpolation.previousValue) {
-          this.changed = true;
-        }
-      }
-      if (changes.hasOwnProperty('language')) {
-        if (changes.language.currentValue !== changes.language.previousValue) {
-          this.changed = true;
-        }
-      }
-    }
-  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.onChanges('language', changes);
+    this.onChanges('code', changes);
 
-  /**
-   * ngOnInit
-   * Execute `highlight()` method if property `code` is assigned, and also property `changed` is set to `true`.
-   * Highlighted string result is assigned to `codeElementRef` inner html.
-   * @memberof PrismComponent
-   */
-  ngOnInit() {
-    if (this.code && typeof (this.code) === 'string' && ( typeof (this.changed) === 'boolean' && this.changed === true)) {
-      this.highlight(this.changed);
-      if (this.callback) {
+    if (this.code) {
+      this.highlight(true);
+      if (this.callback && this.codeElementRef) {
         this.callback(this.codeElementRef.nativeElement);
       }
     }
