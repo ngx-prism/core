@@ -136,7 +136,7 @@ It is designed to use `ng-content` and property `code` separately. You can **NOT
 | async | boolean | Works only with `ng-content`. *"Whether to use Web Workers to improve performance and avoid blocking the UI when highlighting very large chunks of code."* - prismjs |
 | callback | (element: Element) => void \| undefined = undefined | *"An optional callback to be invoked after the highlighting is done. Mostly useful when async is true, since in that case, the highlighting is done asynchronously."* - prismjs  |
 | code | string | *"A string with the code to be highlighted."* - prismjs |
-| **interpolation** | Object | undefined | Data property values to inject.  |
+| **interpolation** | Object \| undefined | Data property values to inject.  |
 | language | string | *"Valid language identifier, for example 'javascript', 'css'."* - prismjs |
 
 
