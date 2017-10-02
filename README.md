@@ -10,7 +10,9 @@
 [![GitHub stars](https://img.shields.io/github/stars/ngx-prism/core.svg)](https://github.com/ngx-prism/core/stargazers)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/ngx-prism/core/master/LICENSE)
 
-Simple Angular 2+ Prism a lightweight, extensible syntax highlighter, built with modern web standards in mind.
+Simple Angular 2+ Prism highlighter module.
+
+Here is ngx-prism with rxjs [@ngx-prism/rxjs](https://github.com/ngx-prism/rxjs)
 
 ----
 
@@ -28,6 +30,7 @@ Simple Angular 2+ Prism a lightweight, extensible syntax highlighter, built with
 * [Donate](#donate)
 
 ----
+
 
 ## Demonstration
 
@@ -100,13 +103,24 @@ import { Component } from '@angular/core';
   template: `
     <prism-highlight
       [language] = "language"
+      [hooks] = "hooks"
       [code] = "content"
-      [interpolation] = "this"
+      [interpolation] = "interpolate"
     ></prism-highlight>`
 })
 export class ExampleComponent {
-  language = 'html';
   content = '<p>test {{language}}</p>';
+  hooks = {
+    'before-sanity-check': (env) => { console.log(`before-sanity-check`, env); },
+    'before-highlight': (env) => { console.log(`before-highlight`, env); },
+    'after-highlight': (env) => { console.log(`after-highlight`, env); },
+    'complete': (env) => { console.log(`complete`, env); },
+    'before-insert': (env) => { console.log(`before-insert`, env); }
+  };
+  interpolate = {
+    language: 'language interpolated'
+  };
+  language = 'html';
   constructor() { }
 }
 ```
@@ -124,7 +138,6 @@ export class ExampleComponent {
 @import '~@ngx-prism/core/dist/themes/prism.css';
 ```
 
-
 ## PrismComponent
 
 It is designed to use `ng-content` and property `code` separately. You can **NOT** use both the same time.
@@ -136,6 +149,7 @@ It is designed to use `ng-content` and property `code` separately. You can **NOT
 | async | boolean | Works only with `ng-content`. *"Whether to use Web Workers to improve performance and avoid blocking the UI when highlighting very large chunks of code."* - prismjs |
 | callback | (element: Element) => void \| undefined = undefined | *"An optional callback to be invoked after the highlighting is done. Mostly useful when async is true, since in that case, the highlighting is done asynchronously."* - prismjs  |
 | code | string | *"A string with the code to be highlighted."* - prismjs |
+| **hooks** | Object | Callback with specific execute time and name: `before-sanity-check`, `before-highlight`, `after-highlight`, `complete`, `before-insert`. |
 | **interpolation** | Object \| undefined | Data property values to inject.  |
 | language | string | *"Valid language identifier, for example 'javascript', 'css'."* - prismjs |
 
@@ -145,12 +159,11 @@ It is designed to use `ng-content` and property `code` separately. You can **NOT
 [Angular Lifecycle Hooks](https://angular.io/guide/lifecycle-hooks)
 
 **ngAfterViewChecked()**    
-Performs `highlight()` method when `ng-content` is used, and also property `language` is changed.
+Performs `highlightElement(element, async, callback)` prismjs method when property `change` value is set to `true`.
 
 **ngOnChanges()**    
 Detect input property `code` or `language` changes by comparing `currentValue` to `previousValue`.    
 If yes, set component property `change` to `true`.    
-Performs `highlight()` when property `code` is set and property `change` value is set to `true`.
 
 ## Scripts
 
