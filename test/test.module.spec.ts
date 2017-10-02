@@ -75,8 +75,8 @@ describe('TestComponent', () => {
     comp.language = 'javascript';
     comp.code.html = `<p align="center" style="">My p {{language}}</p>`;
     fixture.detectChanges();
-    expect(nativeElement.querySelector(`code[class="language-${comp.language}"]`)).toBeTruthy();
-    expect(nativeElement.querySelector('prism-highlight[id="code-interpolation"]').innerText).toContain(`My p ${comp.language}`);
+    expect(nativeElement.querySelector(`code[class~="language-${comp.language}"]`)).toBeTruthy();
+    expect(nativeElement.querySelector('prism-highlight[id~="code-interpolation"]').innerText).toContain(`My p ${comp.language}`);
   }));
 
 });
