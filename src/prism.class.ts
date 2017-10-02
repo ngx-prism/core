@@ -7,12 +7,12 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import Prism from 'prismjs';
 import * as _ from 'lodash-es';
 
 // internal
 import { PrismInterface } from './prism.interface';
 import { CallbackType } from './prism.type';
+import { PrismService } from './prism.service';
 
 /**
  * @export
@@ -26,26 +26,38 @@ export abstract class PrismClass implements PrismInterface {
    * @protected
    * @memberof PrismClass
    */
-  protected change = false;
-  /**
-   * If highlight has been done, then set value to `true`.
-   * @protected
-   * @memberof PrismClass
-   */
-  protected changed = false;
+  protected _change = false;
+  set change(value: boolean) {
+    this._change = value;
+  }
+  get change(): boolean {
+    return this._change;
+  }
 
   /**
    * Whether to use Web Workers to improve performance and avoid blocking the UI when highlighting very large chunks of code.
    * False by default (why? - http://prismjs.com/faq.html#why-is-asynchronous-highlighting-disabled-by-default).
    */
-  @Input('async') public async = false;
+  public _async = false;
+  @Input('async') set async(value: boolean) {
+    this._async = value;
+  }
+  get async(): boolean {
+    return this._async;
+  }
 
   /**
    * An optional callback to be invoked after the highlighting is done.
    * Mostly useful when async is true, since in that case, the highlighting is done asynchronously.
    * @memberof PrismClass
    */
-  @Input('callback') public callback?: CallbackType | undefined = undefined;
+  public _callback?: CallbackType;
+  @Input('callback') set callback(value: CallbackType | undefined) {
+    this._callback = value;
+  }
+  get callback(): CallbackType | undefined {
+    return this._callback;
+  }
 
   /**
    * A string with the code to be highlighted.
@@ -54,20 +66,28 @@ export abstract class PrismClass implements PrismInterface {
    */
   public _code: string;
   @Input('code') set code(value: string) {
-    if (value) {
-      if (typeof (value) === 'string') {
-        this._code = value;
-      } else {
-        throw new Error(`Property \`code\` should be \`string\` instead of provided \`${typeof (value)}\``);
-      }
-    }
+    this._code = value;
   }
   get code(): string {
     return this._code;
   }
 
-  public codeHighlighted: string;
-  public codeInterpolated: string;
+  /**
+   * @type {Object}
+   * @memberof PrismClass
+   */
+  public _hooks: Object;
+  @Input('hooks') set hooks(value: Object) {
+    this._hooks = value;
+    if (value instanceof Object) {
+      _.forEach(value, (element, key) => {
+        this.prismService.hooks().add(key, element);
+      });
+    }
+  }
+  get hooks(): Object {
+    return this._hooks;
+  }
 
   /**
    * Valid language identifier.
@@ -95,14 +115,13 @@ export abstract class PrismClass implements PrismInterface {
    * @type {(Object | undefined)}
    * @memberof PrismClass
    */
-  @Input('interpolation') public interpolation: Object | undefined;
-
-  /**
-   * Interpolate with specific template options.
-   * @private
-   * @memberof PrismClass
-   */
-  private templateOptions = { interpolate: /{{([\s\S]+?)}}/g };
+  public _interpolation?: Object | undefined;
+  @Input('interpolation') set interpolation(value: Object | undefined) {
+    this._interpolation = value;
+  }
+  get interpolation(): Object | undefined {
+    return this._interpolation;
+  }
 
   /**
    * "The element containing the code. It must have a class of language-xxxx to be processed, where xxxx is a valid language identifier."
@@ -111,69 +130,36 @@ export abstract class PrismClass implements PrismInterface {
    */
   @ViewChild('codeElementRef') public codeElementRef: ElementRef;
 
-  /**
-   * Perform method depends on recevied boolean parameter `whenChangeIs`.
-   * @protected
-   * @param {boolean} [whenChangeIs=false]
-   * @memberof PrismClass
-   */
-  protected highlight(whenChangeIs = false): void {
-    if (this.change === whenChangeIs) {
-      // Always need to have codeElementRef.
-      if (this.codeElementRef && this.codeElementRef instanceof ElementRef) {
-
-        // Perform interpolate.
-        if (this.interpolation) {
-          if (this.code) {
-              this.interpolate(this.code);
-            } else {
-              this.codeElementRef.nativeElement.innerHTML = this.interpolate(this.codeElementRef.nativeElement.innerHTML);
-          }
-        }
-
-        // Perform prism highlight code.
-        if (this.code) {
-          this.codeHighlighted = Prism.highlight((this.interpolation) ? this.codeInterpolated : this.code, Prism.languages[this.language]);
-          this.codeElementRef.nativeElement.innerHTML = this.codeHighlighted;
-        } else {
-          Prism.highlightElement(this.codeElementRef.nativeElement, this.async, this.callback);
-        }
-        // highlight is done, do not need to change anymore.
-        this.change = false;
-        // highlight is done, mark it.
-        this.changed = true;
-      }
-    }
-  }
+  constructor(public prismService: PrismService) { }
 
   /**
-   * Observe changes with specific `propertyName`. If found any, set property `change` to `true`.
+   * Observe changes with specific `prop`. If found any, set property `change` to `true`.
    * @protected
-   * @param {string} propertyName
+   * @param {string} prop
    * @param {SimpleChanges} changes
    * @memberof PrismClass
    */
-  protected onChanges(propertyName: string, changes: SimpleChanges): void {
+  protected onChanges(prop: string | string[], changes: SimpleChanges): void {
     if (changes) {
       _.each(changes, (value: any, key: string) => {
-        switch (key) {
-          case propertyName:
-            if (changes[key].currentValue !== changes[key].previousValue) {
-              this.change = true; // changes has been found, set property `change` to `true`.
+        if (prop instanceof Array) {
+          _.each(prop, (propName) => {
+            if (key === propName) {
+              if (changes[key].currentValue !== changes[key].previousValue) {
+                this.change = true; // changes has been found, set property `change` to `true`.
+              }
             }
-          break;
+          });
+        } else {
+          switch (key) {
+            case prop:
+              if (changes[key].currentValue !== changes[key].previousValue) {
+                this.change = true; // changes has been found, set property `change` to `true`.
+              }
+            break;
+          }
         }
       });
     }
-  }
-
-  /**
-   * @private
-   * @param {string} string
-   * @returns {string}
-   * @memberof PrismClass
-   */
-  private interpolate(string: string): string {
-    return this.codeInterpolated = _.template(string, this.templateOptions)(this.interpolation);
   }
 }
