@@ -1,1 +1,1 @@
-export type CallbackType = (element: Element) => void;
+export type CallbackType = (object: Object) => void;
