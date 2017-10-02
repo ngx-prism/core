@@ -1,6 +1,6 @@
 {
   "name": "@ngx-prism/core",
-  "version": "0.3.5",
+  "version": "0.4.0",
   "description": "Simple Angular 2+ Prism highlighter module.",
   "author": "Ścibor Rudnicki <scibor.rudnicki@wwwdev.io> (http://ngx-prism.wwwwdev.io)",
   "homepage": "https://github.com/ngx-prism/core#readme",
