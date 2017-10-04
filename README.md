@@ -12,7 +12,7 @@
 
 Simple Angular 2+ Prism highlighter module.
 
-Here is ngx-prism with rxjs [@ngx-prism/rxjs](https://github.com/ngx-prism/rxjs)
+Here is [@ngx-prism/rxjs](https://github.com/ngx-prism/rxjs) with rxjs.
 
 ----
 
