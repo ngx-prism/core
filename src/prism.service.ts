@@ -13,8 +13,18 @@ export class PrismService {
 
   private templateOptions = { interpolate: /{{([\s\S]+?)}}/g };
 
+  /**
+   * Creates an instance of PrismService.
+   * @param {DomSanitizer} sanitizer
+   * @memberof PrismService
+   */
   constructor(private sanitizer: DomSanitizer) { }
 
+  /**
+   * @param {ElementRef} el
+   * @param {OptionsInterface} options
+   * @memberof PrismService
+   */
   public highlight(el: ElementRef, options: OptionsInterface): void {
     // Always need to have el.
     if (el instanceof ElementRef) {
@@ -53,6 +63,13 @@ export class PrismService {
          .replace(/'/g, '&#039;');
   }
 
+  /**
+   * @private
+   * @param {string} string
+   * @param {Object} interpolation
+   * @returns {string}
+   * @memberof PrismService
+   */
   private interpolate(string: string, interpolation: Object): string {
     if (interpolation && typeof interpolation === 'object') {
       return _.template(string, this.templateOptions)(interpolation);
