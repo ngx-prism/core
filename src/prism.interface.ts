@@ -5,7 +5,14 @@ export interface PrismInterface {
   async: boolean;
   callback?: CallbackType;
   code: string;
-  codeElementRef: ElementRef;
+  el: ElementRef;
   language: string;
   interpolation?: Object;
 }
+
+export interface OptionsInterface  {
+  async?: boolean;
+  callback?: CallbackType;
+  code?: string;
+  interpolation?: Object;
+};
