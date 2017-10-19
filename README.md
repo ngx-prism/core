@@ -13,7 +13,7 @@
 Simple Angular 2+ Prism highlighter module. It uses `highElement()` prismjs method to highlight code. [Click](https://github.com/ngx-prism/rxjs) to get package with rxjs on board.
 
 Pros:
-* Component changeDetection is set to `OnPush`, it gives better overall performance
+* Component changeDetection is set to `OnPush`, it gives better overall performance.
 * Dynamically change highlight string with `code` input property.
 * Interpolate string to highlight with `interpolation` object.
 
