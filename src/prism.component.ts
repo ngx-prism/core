@@ -21,6 +21,7 @@ import { PrismService } from './prism.service';
  * @implements {AfterViewChecked}
  * @implements {OnChanges}
  */
+//#region Component
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -37,6 +38,7 @@ export
 
   /**
    * Creates an instance of PrismComponent.
+   * @param {ChangeDetectorRef} changeDetectorRef
    * @param {PrismService} prismService
    * @memberof PrismComponent
    */
@@ -50,7 +52,7 @@ export
   /**
    * @memberof PrismComponent
    */
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     this.highlightElement(true);
   }
 
@@ -65,3 +67,4 @@ export
     });
   }
 }
+//#endregion
