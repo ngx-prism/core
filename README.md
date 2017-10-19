@@ -10,16 +10,23 @@
 [![GitHub stars](https://img.shields.io/github/stars/ngx-prism/core.svg)](https://github.com/ngx-prism/core/stargazers)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/ngx-prism/core/master/LICENSE)
 
-Simple Angular 2+ Prism highlighter module. It uses `highElement()` prismjs method to highlight code.
+Simple Angular 2+ Prism highlighter module. It uses `highElement()` prismjs method to highlight code. [Click](https://github.com/ngx-prism/rxjs) to get package with rxjs on board.
 
-Here is [@ngx-prism/rxjs](https://github.com/ngx-prism/rxjs) with rxjs.
+Pros:
+* Component changeDetection is set to `OnPush`, it gives better overall performance
+* Dynamically change highlight string with `code` input property.
+* Interpolate string to highlight with `interpolation` object.
+
+Cons:
+* With `async` true does not work properly.
+* Hooks are defined globally.
 
 ----
 
 * [Demonstration](#demonstration)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Attributes](#attributes)
+* [Inputs](#inputs)
 * [Lifecycle Hooks](#lifecycle-hooks)
 * [Scripts](#scripts)
 * [Git](#git)
@@ -140,7 +147,7 @@ export class ExampleComponent {
 @import '~@ngx-prism/core/dist/themes/prism.css';
 ```
 
-### Attributes
+### Inputs
 
 | name | Type | Description |
 |----------|----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
