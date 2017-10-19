@@ -1,50 +1,57 @@
 // external
 import {
   AfterViewChecked,
+  ChangeDetectorRef,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  Input,
   OnChanges,
   SimpleChanges,
-  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import Prism from 'prismjs';
 
 // internal
-import { PrismClass } from './prism.class';
+import { PrismHoodClass } from './prism.class';
 import { PrismService } from './prism.service';
-import { CallbackType } from './prism.type';
 
 /**
  * @export
  * @class PrismComponent
+ * @extends {PrismHoodClass}
  * @implements {AfterViewChecked}
+ * @implements {OnChanges}
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  providers: [ PrismService ],
   selector: 'prism-highlight',
-  templateUrl: './prism.component.html',
-  providers: [ PrismService ]
+  templateUrl: './prism.component.html'
 })
-export class PrismComponent extends PrismClass implements AfterViewChecked, OnChanges {
+export
+  class PrismComponent
+  extends PrismHoodClass
+  implements
+  AfterViewChecked,
+  OnChanges {
 
-  constructor(public prismService: PrismService) {
-    super(prismService);
+  /**
+   * Creates an instance of PrismComponent.
+   * @param {PrismService} prismService
+   * @memberof PrismComponent
+   */
+  constructor(
+    public changeDetectorRef: ChangeDetectorRef,
+    public prismService: PrismService
+  ) {
+    super(changeDetectorRef, prismService);
   }
 
-  ngAfterViewChecked(): void {
-    if (this.change === true) {
-      this.prismService.highlight(this.codeElementRef, {
-        async: this.async,
-        callback: this.callback,
-        code: this.code,
-        interpolation: this.interpolation
-      });
-      this.change = false;
-    }
+  /**
+   * @memberof PrismComponent
+   */
+  ngAfterViewChecked() {
+    this.highlightElement(true);
   }
 
   /**
@@ -53,6 +60,8 @@ export class PrismComponent extends PrismClass implements AfterViewChecked, OnCh
    * @memberof PrismComponent
    */
   ngOnChanges(changes: SimpleChanges): void {
-    this.onChanges(['code', 'language'], changes);
+    this.onChanges(['code', 'language'], changes, (detectedChanges: SimpleChanges) => {
+      this.change = true;
+    });
   }
 }
