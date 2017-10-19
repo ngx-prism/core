@@ -10,7 +10,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/ngx-prism/core.svg)](https://github.com/ngx-prism/core/stargazers)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/ngx-prism/core/master/LICENSE)
 
-Simple Angular 2+ Prism highlighter module.
+Simple Angular 2+ Prism highlighter module. It uses `highElement()` prismjs method to highlight code.
 
 Here is [@ngx-prism/rxjs](https://github.com/ngx-prism/rxjs) with rxjs.
 
@@ -19,11 +19,10 @@ Here is [@ngx-prism/rxjs](https://github.com/ngx-prism/rxjs) with rxjs.
 * [Demonstration](#demonstration)
 * [Installation](#installation)
 * [Usage](#usage)
-* [PrismComponent](#prismcomponent)
-  * [@Input](#input)
-  * [Lifecycle Hooks](#lifecycle-hooks)
+* [Attributes](#attributes)
+* [Lifecycle Hooks](#lifecycle-hooks)
 * [Scripts](#scripts)
-* Git
+* [Git](#git)
   * [Commit](#commit)
   * [Versioning](#versioning)
 * [License](#license)
@@ -34,10 +33,11 @@ Here is [@ngx-prism/rxjs](https://github.com/ngx-prism/rxjs) with rxjs.
 
 ## Demonstration
 
-If you want to see how **@ngx-prism** works with **@angular/cli**, get simple example demonstration usage from github [repository](https://github.com/ngx-prism/demo) by opening your command line and do the following:
+Get simple example demonstration usage from github [repository](https://github.com/ngx-prism/demo) by opening your command line and do the following:
 
 ```bash
 git clone https://github.com/ngx-prism/demo.git
+cd demo
 npm install && npm start
 ```
 
@@ -52,6 +52,8 @@ npm install @ngx-prism/core --save
 ```
 
 ## Usage
+
+It is designed to use `ng-content` and property `code` separately. You should **NOT** use both the same time.
 
 1. Import `PrismModule` into your module.
 
@@ -138,11 +140,7 @@ export class ExampleComponent {
 @import '~@ngx-prism/core/dist/themes/prism.css';
 ```
 
-## PrismComponent
-
-It is designed to use `ng-content` and property `code` separately. You can **NOT** use both the same time.
-
-### @Input
+### Attributes
 
 | name | Type | Description |
 |----------|----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -158,12 +156,9 @@ It is designed to use `ng-content` and property `code` separately. You can **NOT
 
 [Angular Lifecycle Hooks](https://angular.io/guide/lifecycle-hooks)
 
-**ngAfterViewChecked()**    
-Performs `highlightElement(element, async, callback)` prismjs method when property `change` value is set to `true`.
+**ngAfterViewChecked()**: Performs `highlightElement(element, async, callback)` prismjs method when property `change` value is set to `true`.
 
-**ngOnChanges()**    
-Detect input property `code` or `language` changes by comparing `currentValue` to `previousValue`.    
-If yes, set component property `change` to `true`.    
+**ngOnChanges()**: Detect input property `code` or `language` changes by comparing `currentValue` to `previousValue`. If yes, set component property `change` to `true`.    
 
 ## Scripts
 
