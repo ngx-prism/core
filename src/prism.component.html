@@ -1,5 +1,4 @@
-<pre class="language-{{language}}" *ngIf="language">
-  <code #codeElementRef class="language-{{language}}">
-    <ng-content *ngIf="!code"></ng-content>
-  </code>
-</pre>
+<pre class="language-{{language}}" *ngIf="language"><code #el class="language-{{language}}"><ng-content *ngIf="!code"></ng-content></code></pre>
+<!--
+<ng-template #loading><div [innerHTML]="prismService"></div></ng-template>
+-->
