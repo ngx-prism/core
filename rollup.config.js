@@ -70,7 +70,7 @@ export default {
       // specifies alternative files to load for people bundling
       // for the browser. If that's you, use this option, otherwise
       // pkg.browser will be ignored
-      browser: true,  // Default: false
+      browser: false,  // Default: false
 
       // not all files you want to resolve are .js files
       extensions: [ '.js', '.json' ],  // Default: ['.js']
