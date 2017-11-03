@@ -50,7 +50,7 @@ Important:
 
 ## Demonstration
 
-[Live demonstration](#http://ngx-prism.wwwdev.io/core) - Not ready yet.
+[Live demonstration](http://ngx-prism.wwwdev.io/core)
 
 Clone this repository:
 
