@@ -10,16 +10,26 @@
 [![GitHub stars](https://img.shields.io/github/stars/ngx-prism/core.svg)](https://github.com/ngx-prism/core/stargazers)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/ngx-prism/core/master/LICENSE)
 
-Simple Angular 2+ Prism highlighter module. It uses `highElement()` prismjs method to highlight code. [Click](https://github.com/ngx-prism/rxjs) to get package with rxjs on board.
+Simple Angular 2+ Prism highlighter module. [Click](https://github.com/ngx-prism/rxjs) to get package with rxjs on board.
 
 Pros:
+* **AOT** (Ahead Of Time) Package.
+* **MIT** License - you can use it commercially.
 * Component changeDetection is set to `OnPush`, it gives better overall performance.
 * Dynamically change highlight string with `code` input property.
 * Interpolate string to highlight with `interpolation` object.
+* It uses prismjs `highlightElement(element, async, callback)` method so you can use `async` and `hooks` designed by prismjs.
+* Live `@angular/cli` usage demonstration and inside repository.
+* No known vulnerabilities found by `snyk.io`.
 
 Cons:
 * With `async` true does not work properly.
 * Hooks are defined globally.
+* You cannot use `ng-content` and property `code` same time.
+
+Important:
+* It is designed to use `ng-content` and property `code` separately. You should **NOT** use both the same time.
+* In `@angular/cli` add `--aot` to `ng serve` in scripts to have script `"start": "ng serve --aot"`.
 
 ----
 
@@ -40,47 +50,67 @@ Cons:
 
 ## Demonstration
 
-Get simple example demonstration usage from github [repository](https://github.com/ngx-prism/demo) by opening your command line and do the following:
+[Live demonstration](#http://ngx-prism.wwwdev.io/core) - Not ready yet.
+
+Clone this repository:
 
 ```bash
-git clone https://github.com/ngx-prism/demo.git
-cd demo
-npm install && npm start
+git clone https://github.com/ngx-prism/core.git
+```
+
+Go to `demo` folder and with your command line write the following:
+
+```bash
+npm i && npm start
 ```
 
 Open http://localhost:4200/ in your browser.
 
-## Installation
 
-To install, run:
+Example demonstration usage of both `core` and `rxjs` is in [https://github.com/ngx-prism/demo](https://github.com/ngx-prism/demo) repository.
+To install it, do the following:
 
 ```bash
-npm install @ngx-prism/core --save
+git clone https://github.com/ngx-prism/demo.git
+cd demo
+npm i && npm start
+```
+
+Open http://localhost:4200/ in your browser.
+
+
+## Installation
+
+First, you need to install `ngx-prism/core` package into your project, so, open your command line and run:
+
+```bash
+npm i --save @ngx-prism/core
 ```
 
 ## Usage
 
-It is designed to use `ng-content` and property `code` separately. You should **NOT** use both the same time.
-
-1. Import `PrismModule` into your module.
+1. If you have finished `Installation` step, you can import `PrismModule` into your module:
 
 ```typescript
 // example.module.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PrismModule } from '@ngx-prism/core';
+import { PrismModule } from '@ngx-prism/core'; // <----- Here
 import { ExampleComponent } from './example.component';
 
 @NgModule({
   declarations: [ ExampleComponent ],
-  imports: [ CommonModule, PrismModule ],
+  imports: [ 
+    CommonModule, 
+    PrismModule // <----- Here
+  ],
   exports: [ ExampleComponent ]
 })
 export class ExampleModule { }
 ```
 
-2. Use prism component in your example component.
+2. Use `prism-highlight` tag with content inside to highlight it:
 
 ```typescript
 // example.component.ts
@@ -101,7 +131,7 @@ export class ExampleComponent {
 }
 ```
 
-Use `PrismComponent` by providing `code` and `interpolation` property in `ExampleComponent`.
+or use `prism-highlight` tag with `code` and `interpolation` attribute like in `ExampleComponent` below:
 
 ```typescript
 // example.component.ts
@@ -137,21 +167,21 @@ export class ExampleComponent {
 * It is possible to import themes files in `@angular/cli` like below.
 
 ```css
-@import '~@ngx-prism/core/dist/themes/prism-coy.css';
-@import '~@ngx-prism/core/dist/themes/prism-dark.css';
-@import '~@ngx-prism/core/dist/themes/prism-funky.css';
-@import '~@ngx-prism/core/dist/themes/prism-okaidia.css';
-@import '~@ngx-prism/core/dist/themes/prism-solarizedlight.css';
-@import '~@ngx-prism/core/dist/themes/prism-tomorrow.css';
-@import '~@ngx-prism/core/dist/themes/prism-twilight.css';
-@import '~@ngx-prism/core/dist/themes/prism.css';
+@import '~prismjs/themes/prism-coy.css';
+@import '~prismjs/themes/prism-dark.css';
+@import '~prismjs/themes/prism-funky.css';
+@import '~prismjs/themes/prism-okaidia.css';
+@import '~prismjs/themes/prism-solarizedlight.css';
+@import '~prismjs/themes/prism-tomorrow.css';
+@import '~prismjs/themes/prism-twilight.css';
+@import '~prismjs/themes/prism.css';
 ```
 
 ### Inputs
 
 | name | Type | Description |
 |----------|----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| async | boolean | Works only with `ng-content`. *"Whether to use Web Workers to improve performance and avoid blocking the UI when highlighting very large chunks of code."* - prismjs |
+| async | boolean | *"Whether to use Web Workers to improve performance and avoid blocking the UI when highlighting very large chunks of code."* - prismjs |
 | callback | (element: Element) => void \| undefined = undefined | *"An optional callback to be invoked after the highlighting is done. Mostly useful when async is true, since in that case, the highlighting is done asynchronously."* - prismjs  |
 | code | string | *"A string with the code to be highlighted."* - prismjs |
 | **hooks** | Object | Callback with specific execute time and name: `before-sanity-check`, `before-highlight`, `after-highlight`, `complete`, `before-insert`. |
