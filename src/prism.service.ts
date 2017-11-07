@@ -11,8 +11,6 @@ import { CallbackType } from './prism.type';
 @Injectable()
 export class PrismService {
 
-  private interpolateOption = /{{([\s\S]+?)}}/g;
-
   /**
    * Creates an instance of PrismService.
    * @param {DomSanitizer} sanitizer
@@ -72,9 +70,11 @@ export class PrismService {
    */
   private interpolate(string: string, interpolation: Object): string {
     if (interpolation && typeof interpolation === 'object') {
-      _.templateSettings.interpolate = this.interpolateOption;
-      const compiled = _.template(string);
-      return compiled(interpolation);
+
+      // Use custom template delimiters.
+      _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
+
+      return _.template(string)(interpolation);
     }
     return string;
   }
