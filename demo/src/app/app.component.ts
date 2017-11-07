@@ -50,12 +50,16 @@ export class AppComponent {
   selectedLanguage = 'css';
   title = '@ngx-prism/core example';
   ts = `
-    async = ${this.async};
-    language = '${this.language}';
-    code = \`${this.code}\`;
-    callback = () => {
-      console.log('callback');
-  }`;
+  async = ${this.async};
+  language = '${this.language}';
+  code = \`${this.code}\`;
+  callback = () => {
+    console.log('callback');
+  };
+  interpolate = {
+    language: this.language,
+    title: this.title
+  };`;
 
   interpolate = {
     language: this.language,
@@ -87,7 +91,11 @@ export class AppComponent {
   code = \`${this.code}\`;
   callback = () => {
     console.log('callback');
-  }`;
+  };
+  interpolate = {
+    language: this.language,
+    title: this.title
+  };`;
   }
   setAsync(value) {
     console.log(`setAsync`, value);
