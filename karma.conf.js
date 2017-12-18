@@ -17,6 +17,16 @@ const htmlminOpts = {
   removeComments: true,
 };
 
+const rpaConfig = {
+  preprocessors: {
+    template: template => htmlMinifier.minify(template, htmlminOpts),
+    style: scss => {
+      const css = sass.renderSync({ data: scss }).css;
+      return cssmin.minify(css).styles;
+    },
+  }
+};
+
 module.exports = function(config) {
   config.set({
 
@@ -33,18 +43,19 @@ module.exports = function(config) {
     files: [
       // Make sure to disable Karma’s file watcher
       // because the preprocessor will use its own.
-      { pattern: 'test/*.ts', watched: false },
+      { pattern: 'test/index.ts', watched: false },
+      { pattern: 'test/*.spec.ts', watched: false },
       { pattern: 'src/*.spec.ts', watched: false },
       { pattern: 'src/**/*.spec.ts', watched: false }
     ],
 
 
     plugins: [
-      require('karma-jasmine'),
       require('karma-chrome-launcher'),
-      require('karma-jasmine-html-reporter'),
-      require('karma-firefox-launcher'),
       require('karma-coverage'),
+      require('karma-firefox-launcher'),
+      require('karma-jasmine'),
+      require('karma-jasmine-html-reporter'),
       require('karma-rollup-preprocessor'),
     ],
 
@@ -66,15 +77,7 @@ module.exports = function(config) {
       sourcemap: 'inline',
       // rollup settings. See Rollup documentation
       plugins: [
-        angular({
-          preprocessors: {
-            template: template => htmlMinifier.minify(template, htmlminOpts),
-            style: scss => {
-              const css = sass.renderSync({ data: scss }).css;
-              return cssmin.minify(css).styles;
-            },
-          }
-        }),
+        angular({}),
         commonjs(),
         nodeResolve({
           // use "module" field for ES6 module if possible
