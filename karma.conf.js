@@ -72,6 +72,10 @@ module.exports = function(config) {
 
     rollupPreprocessor: {
       // will help to prevent conflicts between different tests entries
+      external: [
+        {'lodash-es': '_'},
+        {'prismjs': 'Prism'}
+      ],  
       name: 'ngx-prism.core',
       format: 'umd',
       sourcemap: 'inline',

@@ -19,6 +19,10 @@ const htmlminOpts = {
 };
 
 export default {
+  external: [
+    {'lodash-es': '_'},
+    {'prismjs': 'Prism'}
+  ],
   input: 'dist/index.js',
   output: {
     // core output options
