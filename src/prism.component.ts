@@ -1,14 +1,14 @@
 // external
 import {
-  AfterViewChecked,
+  AfterContentInit,
+  AfterViewInit,
   ChangeDetectorRef,
   ChangeDetectionStrategy,
   Component,
-  OnChanges,
-  SimpleChanges,
+  OnInit,
   ViewEncapsulation
 } from '@angular/core';
-import Prism from 'prismjs';
+import { ChangeDetection } from '@angular-package/change-detection';
 
 // internal
 import { PrismHoodClass } from './prism.class';
@@ -18,23 +18,30 @@ import { PrismService } from './prism.service';
  * @export
  * @class PrismComponent
  * @extends {PrismHoodClass}
- * @implements {AfterViewChecked}
- * @implements {OnChanges}
+ * @implements {AfterViewInit}
  */
-//#region Component
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   providers: [ PrismService ],
-  selector: 'prism-highlight',
+  selector: 'ngx-prism',
   templateUrl: './prism.component.html'
+})
+@ChangeDetection(false, {
+  async: true,
+  callback: true,
+  code: true,
+  hooks: true,
+  language: true,
+  interpolation: true
 })
 export
   class PrismComponent
   extends PrismHoodClass
   implements
-  AfterViewChecked,
-  OnChanges {
+  AfterContentInit,
+  AfterViewInit,
+  OnInit {
 
   /**
    * Creates an instance of PrismComponent.
@@ -49,22 +56,24 @@ export
     super(changeDetectorRef, prismService);
   }
 
-  /**
-   * @memberof PrismComponent
-   */
-  ngAfterViewChecked(): void {
-    this.highlightElement(true);
+  ngAfterContentInit() {
+    if (this.cd) {
+      this.__properties = this.cd;
+    }
   }
 
   /**
-   * Detect `code` and `language` property changes.
-   * @param {SimpleChanges} changes
    * @memberof PrismComponent
    */
-  ngOnChanges(changes: SimpleChanges): void {
-    this.onChanges(['code', 'language'], changes, (detectedChanges: SimpleChanges) => {
-      this.change = true;
+  ngAfterViewInit() {
+    this.ready = true;
+    this.highlightElement({
+      code: this.code,
+      language: this.language
     });
   }
+
+  ngOnInit() {}
+
 }
 //#endregion
