@@ -3,6 +3,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript';
 import uglify from 'rollup-plugin-uglify';
+// import replace from 'rollup-plugin-replace';
 import { minify } from 'uglify-es';
 
 // rollup-plugin-angular addons
@@ -43,7 +44,7 @@ export default {
   },
   onwarn,
   plugins: [
-    angular({
+    angular((process.env.BUILD === 'production') ? {
       preprocessors: {
         template: template => minifyHtml(template, htmlminOpts),
         style: scss => {
@@ -51,7 +52,7 @@ export default {
           return cssmin.minify(css).styles;
         },
       }
-    }),
+    } : {}),
     commonjs(),
     nodeResolve({
       // use "module" field for ES6 module if possible
@@ -94,7 +95,7 @@ export default {
     typescript({
       typescript: require('./node_modules/typescript')
     }),
-    uglify({}, minify)
+    (process.env.BUILD === 'production') ? uglify({}, minify) : function() { }
   ]
 };
 
