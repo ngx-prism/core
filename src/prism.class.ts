@@ -1,17 +1,16 @@
 /// <reference path="./../typings/index.d.ts" />
+
 // external
 import {
   ChangeDetectorRef,
   ElementRef,
   Input,
   Injectable,
-  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import * as _ from 'lodash-es';
 
 // internal
-import { ComponentHoodClass } from './component-hood.class';
 import { PrismInterface } from './prism.interface';
 import { CallbackType } from './prism.type';
 import { PrismService } from './prism.service';
@@ -22,46 +21,85 @@ import { PrismService } from './prism.service';
  * @class PrismHoodClass
  */
 @Injectable()
-export abstract class PrismHoodClass extends ComponentHoodClass implements PrismInterface {
-  /**
-   * Whether to or not to do highlight. If value is set to `true` then do highlight.
-   * @protected
-   * @memberof PrismHoodClass
-   */
-  protected change = false;
+export abstract class PrismHoodClass implements PrismInterface {
+  @ViewChild('el', { read: ElementRef }) el: ElementRef;
+
+  ready = false;
+
+  __properties: any;
+
+  _cd: any;
+  @Input('cd')
+  set cd(cd: any) {
+    this._cd = cd;
+    if (this.ready === true) {
+      this.__properties = cd;
+    }
+  }
+  get cd() {
+    return this._cd;
+  }
 
   /**
    * Whether to use Web Workers to improve performance and avoid blocking the UI when highlighting very large chunks of code.
    * False by default (why? - http://prismjs.com/faq.html#why-is-asynchronous-highlighting-disabled-by-default).
    */
-  @Input('async') public async = false;
+  public _async = false;
+  @Input('async')
+  set async(async: boolean) {
+    this._async = async;
+  }
+  get async(): boolean {
+    return this._async;
+  }
 
   /**
    * An optional callback to be invoked after the highlighting is done.
    * Mostly useful when async is true, since in that case, the highlighting is done asynchronously.
    * @memberof PrismHoodClass
    */
-  @Input('callback') public callback: CallbackType | undefined;
+  public _callback: CallbackType | undefined;
+  @Input('callback')
+  set callback(callback: CallbackType | undefined) {
+    this._callback = callback;
+  }
+  get callback(): CallbackType | undefined {
+    return this._callback;
+  }
 
   /**
    * A string with the code to be highlighted.
    * @type {string}
    * @memberof PrismHoodClass
    */
-  @Input('code') public code: string;
+  public _code: string;
+  @Input('code')
+  set code(code: string) {
+    this._code = code;
+    if (this.ready) {
+      if (this.__properties.code === true) {
+        this.highlightElement({ code, language: this.language });
+      }
+    }
+  }
+  get code(): string {
+    return this._code;
+  }
 
   /**
    * @type {Object}
    * @memberof PrismHoodClass
    */
   public _hooks: Object;
-  @Input('hooks') set hooks(value: Object) {
-    this._hooks = value;
-    if (value instanceof Object) {
-      _.forEach(value, (element, key) => {
+  @Input('hooks')
+  set hooks(hooks: Object) {
+    this._hooks = hooks;
+    if (hooks instanceof Object) {
+      _.forEach(hooks, (element: any, key: string) => {
         this.prismService.hooks().add(key, element);
       });
     }
+    this.highlightElement({ code: this.code, language: this.language });
   }
   get hooks(): Object {
     return this._hooks;
@@ -73,17 +111,18 @@ export abstract class PrismHoodClass extends ComponentHoodClass implements Prism
    * @memberof PrismHoodClass
    */
   public _language: string;
-  @Input('language') set language(value: string) {
-    if (value) {
-      if (typeof (value) === 'string') {
-        this._language = value;
+  @Input('language') set language(language: string) {
+    if (language) {
+      if (typeof (language) === 'string') {
+        this._language = language;
+        this.highlightElement({ code: this.code, language });
       } else {
-        throw new Error(`Property \`language\` should be \`string\` instead of provided \`${typeof (value)}\``);
+        throw new Error(`Property \`language\` should be \`string\` instead of provided \`${typeof (language)}\``);
       }
     } else {
       throw new Error('Missing property `language`.');
     }
-  };
+  }
   get language(): string {
     return this._language;
   }
@@ -104,23 +143,20 @@ export abstract class PrismHoodClass extends ComponentHoodClass implements Prism
   constructor(
     public changeDetectorRef: ChangeDetectorRef,
     public prismService: PrismService
-  ) {
-    super();
-  }
+  ) {}
 
   /**
-   * @param {boolean} [change=false]
+   * @param {{code: string, language: string}} result
    * @memberof PrismHoodClass
    */
-  highlightElement(change = false): void {
-    if (this.change === change) {
+  highlightElement(result: { code: string, language: string }): void {
+    if (this.ready === true) {
       this.prismService.highlight(this.el, {
         async: this.async,
         callback: this.callback,
-        code: this.code,
+        code: result.code,
         interpolation: this.interpolation
       });
-      this.change = false;
     }
   }
 }
