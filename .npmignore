@@ -18,5 +18,5 @@ npm-debug.log
 node_modules
 src
 test
-/demo
-/coverage
+demo
+coverage
