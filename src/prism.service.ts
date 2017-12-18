@@ -1,3 +1,5 @@
+/// <reference path="./../typings/index.d.ts" />
+
 // external
 import { ElementRef, Injectable, SecurityContext } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
