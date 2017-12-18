@@ -98,7 +98,7 @@
     ],
 
     "directive-selector": [true, "attribute", "prismHighlight", "camelCase"],
-    "component-selector": [true, "element", "prism-highlight", "kebab-case"],
+    "component-selector": [true, "element", "ngx-prism", "kebab-case"],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
