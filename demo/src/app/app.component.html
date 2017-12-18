@@ -1,151 +1,77 @@
+<!-- container -->
 <mat-sidenav-container>
   <a href="https://github.com/ngx-prism/core" class="github-corner" aria-label="View source on Github">
-    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#4a4a4a; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#4a4a4a; color:#ffffff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true">
       <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
       <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
       <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
     </svg>
   </a>
-
   <!-- primary content -->
   <div class="my-content">
     <ngx-docs-example
-      [css]="css"
-      [html]="html"
-      [title]="title"
-      [ts]="ts"
+      *ngFor="let example of examples; let i = index"
+      [css]="example.css"
+      [html]="example.html"
+      [title]="example.title"
+      [ts]="example.ts"
     >
       <div class="body">
-        <prism-highlight
-          [async]="async"
-          [hooks]="hooks"
-          [language]="language"
-          [interpolation]="interpolate"
-          [code]="code"
-          [callback]="callback"
-        ></prism-highlight>
-        <prism-highlight
-          [async]="async"
-          [language]="language"
-          [interpolation]="interpolate"
-        >{{code}}</prism-highlight>
+        <ngx-prism
+          [cd]="prism[i]?.__properties"
+          [async]="prism[i]?.async"
+          [hooks]="prism[i]?.hooks"
+          [language]="prism[i].language"
+          [interpolation]="prism[i]?.interpolation"
+          [code]="prism[i]?.code"
+          [callback]="prism[i]?.callback"
+        >{{prism[i]?.ngContent}}</ngx-prism>
       </div>
       <div class="debug">
-        {{payload}}
+        {{example?.debug}}
       </div>
     </ngx-docs-example>
   </div>
 
   <!-- sidenav -->
-  <mat-sidenav mode="side" opened="true" align="end">
+  <mat-sidenav
+    mode="side"
+    opened="true"
+    align="end"
+    fxHide.xs
+    fxHide.sm
+  >
     <form (ngSubmit)="submit(form)" [formGroup]="form">
-      <mat-checkbox formControlName="async" name="async" [value]="async" (click)="setAsync(async)">
-        Async {{async}}
-      </mat-checkbox>
-      <br />
-      <br />
-      <label>Language</label>
-      <br />
-      <mat-radio-group class="example-radio-group" formControlName="language">
-        <mat-radio-button class="example-radio-button" *ngFor="let language of languages" [value]="language" (click)="setLanguage(language)" name="language">
-          {{language}}
-        </mat-radio-button>
-      </mat-radio-group>
-      <br/>
-      <br/>
-      <mat-form-field>
-        <textarea matInput rows="7" name="code" placeholder="code" formControlName="code" (keyup)="update($event)" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="15"></textarea>
-      </mat-form-field>
+      <div formArrayName="prism" *ngFor="let item of form.get('prism')?.controls; let i = index" >
+        <div [formGroupName]="i">
+          <mat-checkbox formControlName="async" name="async" [value]="item.async" [(ngModel)]="prism[i].async">
+            Async {{prism[i].async}}
+          </mat-checkbox>
+          <br />
+          <h4>Change detection:</h4>
+          <div formGroupName="__properties"> <!-- add form.get() -->
+            <mat-checkbox formControlName="code" name="code" [(ngModel)]="prism[i].__properties.code">
+              code: {{prism[i].__properties.code}}
+            </mat-checkbox>
+            <mat-checkbox formControlName="language" name="language" [(ngModel)]="prism[i].__properties.language">
+                language: {{prism[i].__properties.language}}
+            </mat-checkbox>
+          </div>
+          <h4>Language:</h4>
+          <mat-radio-group class="example-radio-group" formControlName="language" [(ngModel)]="prism[i].language">
+            <mat-radio-button class="example-radio-button" *ngFor="let language of languages" [value]="language" name="language" >
+              {{language}}
+            </mat-radio-button>
+          </mat-radio-group>
+          <br/>
+          <br/>
+          <mat-form-field>
+            <textarea matInput rows="7" name="code" placeholder="code" formControlName="code" [(ngModel)]="prism[i].code" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="15">{{item.code}}</textarea>
+          </mat-form-field>
+        </div>
+      </div>
       <button type="submit" mat-raised-button color="primary">Submit</button> <span>Check your console</span>
     </form>
   </mat-sidenav>
 </mat-sidenav-container>
 
-
-<!-- 
-<a href="https://github.com/ngx-prism/core" class="github-corner" aria-label="View source on Github">
-  <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
-    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-    <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-    <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
-  </svg>
-</a>
-<div id="logo">
-  <div></div>
-  <img src="http://wwwdev.io/logos/ngx-prism-background-small.png" />
-</div>
-
-<ngx-docs-example
-  [css]="example.css.css"
-  [html]="example.css.html"
-  [title]="example.css.title"
-  [ts]="example.css.ts"
->
-  <div class="body">
-      <mat-form-field>
-        <textarea matInput rows="7" placeholder="Highlighted code" name="css" (keyup)="update($event)" [innerHTML]="example.css.code"></textarea>
-      </mat-form-field>
-    <prism-highlight [language]="example.css.language" [code]="example.css.code" [callback]="callback"></prism-highlight>
-    <prism-highlight [language]="example.css.language">{{example.css.code}}</prism-highlight>
-  </div>
-  <div class="debug">
-  </div>
-</ngx-docs-example>
-
-
-
-<!--The content below is only a placeholder and can be replaced.
-<h1>Example of working @ngx-prism/core.</h1>
-<h2>
-  Component: prism-highlight
-</h2>
-<h4>
-  CSS
-</h4>
-<div>
-  <p>
-    <input type="radio" name="css" value="css" (change)="setLanguage($event)" [attr.checked] = "example.css.language === 'css' ? 'checked' : null" id="CSS" />
-    <label for="CSS">CSS</label>
-    <input type="radio" name="css" value="html" (change)="setLanguage($event)" [attr.checked] = "example.css.language === 'html' ? 'checked' : null" id="HTML" />
-    <label for="HTML">HTML</label>
-    <input type="radio" name="css" value="javascript" (change)="setLanguage($event)" [attr.checked] = "example.css.language === 'javascript' ? 'checked' : null" id="JAVASCRIPT" />
-    <label for="JAVASCRIPT">JAVASCRIPT</label>
-  </p>
-  <textarea rows="7" style="width: 100%; " name="css" (keyup)="update($event)" [innerHTML]="example.css.code"></textarea>
-  <prism-highlight [language]="example.css.language" [code]="example.css.code" [callback]="callback"></prism-highlight>
-  <prism-highlight [language]="example.css.language">{{example.css.code}}</prism-highlight>
-</div>
-<h4>
-  HTML with callback
-</h4>
-<div>
-  <textarea rows="15" style="width: 100%; " name="html" (keyup)="update($event)" [innerHTML]="example.html.code"></textarea>
-  <prism-highlight [language]="'html'" [callback]="callback" [code]="example.html.code"></prism-highlight>
-  <prism-highlight [language]="'html'">{{example.html.code}}</prism-highlight>
-</div>
--->
-<!-- Html with interpolation
-<h4>
-  HTML with interpolation
-</h4>
-<div>
-  <textarea rows="15" style="width: 100%; " name="interpolation" (keyup)="update($event)" [innerHTML]="example.interpolation.code"></textarea>
-  <p>
-    <input type="radio" name="interpolation" value="css" (change)="setLanguage($event)" [attr.checked] = "example.interpolation.language === 'css' ? 'checked' : null" /> CSS
-    <input type="radio" name="interpolation" value="html" (change)="setLanguage($event)" [attr.checked] = "example.interpolation.language === 'html' ? 'checked' : null" /> HTML
-    <input type="radio" name="interpolation" value="javascript" (change)="setLanguage($event)" [attr.checked] = "example.interpolation.language === 'javascript' ? 'checked' : null" /> JAVASCRIPT
-  </p>
-  <prism-highlight [interpolation]="this" [language]="example.interpolation.language" [code]="example.interpolation.code">/** ng-content */</prism-highlight>
-  <prism-highlight [interpolation]="this" [language]="example.interpolation.language">{{example.interpolation.code}}</prism-highlight>
-</div>
--->
-<!-- Hooks
-<h4>
-  HTML with Hooks
-</h4>
-<div>
-  <textarea rows="15" style="width: 100%; " name="html" (keyup)="update($event)" [innerHTML]="example.html.code"></textarea>
-  <prism-highlight [language]="'html'" [hooks]="hooks" [code]="example.html.code"></prism-highlight>
-  <prism-highlight [language]="'html'">{{example.html.code}}</prism-highlight>
-</div>
--->
