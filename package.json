@@ -62,7 +62,7 @@
     "karma-rollup-preprocessor": "^5.0.2",
     "lodash-decorators": "^4.5.0",
     "lodash-es": "^4.17.4",
-    "node-sass": "^4.7.2",
+    "node-sass": "^7.0.0",
     "prismjs": "^1.9.0",
     "reflect-metadata": "^0.1.10",
     "rimraf": "^2.6.2",
